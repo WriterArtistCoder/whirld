@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import InputPanel from './components/InputPanel';
+import InputPanel from './components/InputPanel/InputPanel';
 import OutputPanel from './components/OutputPanel';
-import { getRandomLanguage, translateText } from './utils/translator'
+// import { getRandomLanguage, translateText } from './utils/translator'
+import { GoogleTranslate } from './GoogleCloud/GoogleTranslate'
 
 const App: React.FC = () => {
   const [inputText, setInputText] = useState('');
@@ -16,9 +17,10 @@ const App: React.FC = () => {
 
     try {
       for (let i = 0; i < 20; i++) {
-        const randomLang = getRandomLanguage();
-        currentText = await translateText(currentText, 'en', randomLang);
-        currentText = await translateText(currentText, randomLang, 'en');
+        const randomLang = "fr"
+        console.log(`en > ${randomLang} > en`)
+        currentText = await new GoogleTranslate().translateText(currentText, 'en', randomLang);
+        currentText = await new GoogleTranslate().translateText(currentText, randomLang, 'en');
         setOutputText(currentText);
       }
     } catch (error) {
