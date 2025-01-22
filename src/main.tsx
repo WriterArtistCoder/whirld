@@ -8,6 +8,8 @@ const App: React.FC = () => {
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
   const [isTranslating, setIsTranslating] = useState(false);
+  
+  const translator = new GoogleTranslate();
 
   const handleScramble = async () => {
     if (!inputText.trim() || isTranslating) return;
@@ -19,9 +21,25 @@ const App: React.FC = () => {
       for (let i = 0; i < 20; i++) {
         const randomLang = "fr"
         console.log(`en > ${randomLang} > en`)
-        currentText = await new GoogleTranslate().translateText(currentText, 'en', randomLang);
-        currentText = await new GoogleTranslate().translateText(currentText, randomLang, 'en');
-        setOutputText(currentText);
+
+        try {
+          // Translate from English to Spanish
+          const translation = await translator.translateText(
+            currentText,
+            'en',
+            randomLang
+          );
+
+          const translationBack = await translator.translateText(
+            translation,
+            randomLang,
+            'en'
+          );
+
+          setOutputText(translationBack)
+        } catch {
+          console.log('whoops')
+        }
       }
     } catch (error) {
       console.error('Translation error:', error);
