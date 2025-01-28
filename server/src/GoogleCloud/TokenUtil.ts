@@ -9,15 +9,18 @@ export function generateJWT() {
   const currentTime = Math.floor(Date.now() / 1000)
   const expirationTime = currentTime + 3600 // 1 hour
   const payload = {
-    iss: import.meta.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL,
+    iss: process.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL,
     scope: scope,
     aud: tokenEndpoint,
     exp: expirationTime,
     iat: currentTime,
   }
-  const token = jwt.sign(payload, import.meta.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY, {
+
+  const PKEY = (process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY || '').replace(/\\n/g, '\n')
+  const token = jwt.sign(payload, PKEY || '', {
     algorithm: 'RS256',
   })
+
   return token
 }
 

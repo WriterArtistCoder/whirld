@@ -23,7 +23,7 @@ const App: React.FC = () => {
         console.log(`en > ${randomLang} > en`)
 
         try {
-          // Translate from English to Spanish
+          // Translate from English to French
           const translation = await translator.translateText(
             currentText,
             'en',
@@ -38,7 +38,7 @@ const App: React.FC = () => {
 
           setOutputText(translationBack)
         } catch {
-          console.log('whoops')
+          console.log('Translation error =(')
         }
       }
     } catch (error) {

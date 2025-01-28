@@ -1,0 +1,21 @@
+{
+  "name": "whirld-server",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.7",
+    "@types/jsonwebtoken": "^9.0.8",
+    "axios": "^1.7.9",
+    "hono": "^4.6.19",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "scripts": {
+    "dev": "bun --watch run src/index.ts"
+  }
+}
