@@ -12,43 +12,86 @@ const WHAT_TO_LOG = {
     languages: true,
     progress: true
 }
+const OH_CRAP_LIMIT = 5
 
 // Enable CORS
 app.use("/*", cors())
 
 // Scrmable a text
 app.post("/api/scramble", async (c) => {
+    c.status(200)
     console.log(`\x1b[1m  \n\n\n/api/scramble \x1b[0m`)
     
+    // TODO add maximum request time, abort with 504 if exceeded
+
     // TODO handle simeltaneous requests (assign ID?)
 
     // TODO Sanitize body and handle 400 formatting errors
     const { lang, text, times } = await c.req.json()
+    let totalProblems = 0, problemsInARow = 0
     let langLog = lang
     let translation = text
 
-    if (!Number.isInteger(times) || times<2) throw new Error('"times" property should be 2 or more')
+    if (!Number.isInteger(times) || times<2) {
+        c.status(400)
+        return c.json({
+            forshame: '"times" property should be 2 or more'
+        })
+    } else if (times>500) {
+        c.status(400)
+        return c.json({
+            forshame: '"times" property should be less than 501'
+        })
+    }
 
     let prevLang = lang
     for (var i = 0; i < times+1; i++) {
-        if (i>0) {  
+        if (i>0) {
             let nextLang = i==times ? lang : LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
             langLog += ' > ' + nextLang
             
             try {
                 translation = await groot.translateText(translation, nextLang, prevLang)
             } catch (e) {
-                if (e instanceof Error) console.log(e.message)
-                c.status(500)
+                totalProblems++
+                c.status(222) // Ad hoc HTTP code meaning 'error was overcome'
 
-                return "Sorry :(" // TODO add actual explanation
+                // Log that there was an error
+                // TODO log specifics
+                console.log(`\x1b[30;103m${new Date().toISOString()}\x1b[0m \x1b[30;101m Unexpected error \x1b[0m \n`)
+
+                if (++problemsInARow < OH_CRAP_LIMIT) {
+                    // Reset and try again
+                    nextLang = prevLang; i--; continue
+                } else {
+                    // Give up if there were too many problems in a row
+
+                    try {
+                        c.status(299) // Ad hoc HTTP code meaning 'error was partially overcome'
+                        return c.json({
+                            bamboozled: translation,
+                            original: text,
+                            langs: langLog.split(' > '),
+                            sorry: `${i} of requested ${times} translations were completed`
+                        })
+                    } catch {
+                        c.status(500)
+                        return c.json({
+                            sorry: "Sorry"
+                        })
+                    }
+                }
             }
             prevLang = nextLang
         }
 
+        problemsInARow = 0
+
         // Logging
 
         let DATE = `\x1b[93m${new Date().toISOString()}`
+
+        // TODO add logging of elapsed time
 
         let LANGLOG = ''
 
@@ -65,6 +108,8 @@ app.post("/api/scramble", async (c) => {
         let PROGRESS = ''
         if (WHAT_TO_LOG.progress) {
             PROGRESS = `\x1b[91m \n${i}/${times} (${Math.floor(1000*i/times)/10}%)`;
+            if (totalProblems>0) PROGRESS += ` +${totalProblems} aborted attempt`
+            if (totalProblems>1) PROGRESS += 's'
         }
 
         let TRANSLATION = `\n \x1b[34m${translation}\n`
@@ -75,8 +120,6 @@ app.post("/api/scramble", async (c) => {
         //                                          Translation (blue)
         console.log(`${DATE} ${LANGLOG} ${PROGRESS} ${TRANSLATION} \x1b[0m`)
     }
-
-    c.status(200) // TODO Make this reflect actual status
 
     return c.json({
         bamboozled: translation,
