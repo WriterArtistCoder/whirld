@@ -1,6 +1,6 @@
 {
   "name": "whirld-server",
-  "module": "index.ts",
+  "module": "api.ts",
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest"
@@ -16,6 +16,6 @@
     "jsonwebtoken": "^9.0.2"
   },
   "scripts": {
-    "dev": "bun --watch run src/index.ts"
+    "dev": "bun --watch run src/api.ts"
   }
 }

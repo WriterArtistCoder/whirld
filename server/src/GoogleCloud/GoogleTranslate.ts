@@ -65,6 +65,10 @@ export class GoogleTranslate {
         throw new Error('No translation found in response');
       }
 
+      // If source language detected by Google Translate, tell api.ts what that was
+      if (response.data.data.translations[0].detectedSourceLanguage)
+        return response.data.data.translations[0].detectedSourceLanguage + ' ' + response.data.data.translations[0].translatedText
+
       return response.data.data.translations[0].translatedText;
 
     } catch (error) {
