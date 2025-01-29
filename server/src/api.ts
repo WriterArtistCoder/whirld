@@ -19,6 +19,16 @@ const LANGUAGES = ['af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs', '
 const OH_CRAP_LIMIT = 5 // Fold after 5 consecutive unsuccessful translations
 const TIMEOUT_AFTER = 1000 * 120 // Time out after 2 minutes
 
+const OkStatus = 200 as StatusCode                  // Happy day!
+const OvercameStatus = 222 as UnofficialStatusCode  // Errors encountered but overcome (TODO use 200; user doesnt care)
+const DetectionStatus = 288 as UnofficialStatusCode // Source language not detected or cannot be translated into, using default lang
+const BailedStatus = 299 as UnofficialStatusCode    // Too many errors in a row, had to bail and submit unfinished work
+const USuckStatus = 400 as StatusCode               // It's your fault
+const TeapotStatus = 418 as StatusCode              // I am a teapot
+const RIPStatus = 500 as StatusCode                 // Died
+
+/* Logging */
+
 const TERMINAL_COLS = 80 // Max columns in terminal
 const DATE_COLS = 25 // Columns taken up by yellow timestamp
 enum Pref {
@@ -32,27 +42,6 @@ const WHAT_TO_LOG = { // TODO set this through flags
     translation: Pref.SOME
 }
 const ANSI_LOGGING = true // Turn on/off ANSI formatting escape codes
-
-// Happy day!
-const OkStatus = 200 as StatusCode
-
-// Errors encountered but overcome. TODO Replace with 200, user doesn't need to know
-const OvercameStatus = 222 as UnofficialStatusCode
-
-// Source language not detected or cannot be translated into, using default output language
-const DetectionStatus = 288 as UnofficialStatusCode
-
-// Too many errors in a row, had to bail and just submit unfinished work
-const BailedStatus = 299 as UnofficialStatusCode
-
-// It's your fault
-const USuckStatus = 400 as StatusCode
-
-// I am a teapot
-const TeapotStatus = 418 as StatusCode
-
-// Died
-const RIPStatus = 500 as StatusCode
 
 // Log to file as well as stdout
 var fs = require('fs')
@@ -98,7 +87,7 @@ app.get("/api/scramble", async (c) => {
         `)
 })
 
-// Scramble a text
+/* Scramble a text */
 
 // TODO Enable timeout, make sure it doesn't keep running after returning HTTP 408
 // app.use("/api/scramble", timeout(TIMEOUT_AFTER, new HTTPException(408)))
@@ -112,14 +101,25 @@ app.post("/api/scramble", async (c) => {
     // TODO Make API more orthodox in its error handling
     
     try {
-// Validation
+/* Validation */
         // TODO Sanitize body
         const { lang, text, times } = await c.req.json()
 
-        // Substitute lang for null if invalid
-        const LANG_INVALID = !(typeof lang === 'string') || !LANGUAGES.includes(lang)
-        let endLanguage = LANG_INVALID?DEFAULT_LANG:lang // Language to return translation in
-        let LANG_DETECTED = false                // Has the language been auto-detected yet?
+        enum LangStatus {
+            GIVEN, // Valid language was given by client
+            UNDET, // Language invalid, and not yet detected
+            DETEC, // Language detected
+            NSUPP  // Langauge detected but unsupported
+        }
+        let langStat = LangStatus.GIVEN
+        let langLog  = lang // List of languages used
+        let prevLang = lang // Current language of translated text
+        let outLang  = lang // Language to return translation in
+        let nspLang  = ''   // If NSUPP, store unsupported language here
+
+        // If lang invalid, use placeholders
+        if (!(typeof lang === 'string') || !LANGUAGES.includes(lang))
+            langStat = LangStatus.UNDET, langLog = '??', prevLang = undefined, outLang = DEFAULT_LANG
 
         // HTTP 400 if text invalid
         if (!(typeof text === 'string')) {
@@ -142,32 +142,32 @@ app.post("/api/scramble", async (c) => {
             })
         }
 
-// Translation
+/* Translation */
         let totalProblems = 0, problemsInARow = 0
-        let langLog = LANG_INVALID?'??':lang
         let translation = text
 
-        let prevLang = LANG_INVALID?undefined:lang
         for (var i = 0; i < times+1; i++) {
             if (i>0) {
-                let nextLang = i==times ? endLanguage : LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
+                let nextLang = i==times ? outLang : LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
                 langLog += ' > ' + nextLang
                 
                 try {
                     translation = await groot.translateText(translation, nextLang, prevLang)
-                    if (LANG_INVALID && !LANG_DETECTED) {
+                    if (langStat == LangStatus.UNDET) {
                         // TODO handle Google Translate not detecting a language at all
                         // Extract detected language
-                        LANG_DETECTED = true
-                        endLanguage = translation.substring(0, translation.indexOf(' '))
-                        translation = translation.substring(translation.indexOf(' ')+1)
-                        langLog = langLog.replace('??', endLanguage)
-                        console.log(`\x1b[30;103m${new Date().toISOString()}\x1b[0m Detected language as ${endLanguage}`)
+                        langStat = LangStatus.DETEC
 
-                        if (!LANGUAGES.includes(endLanguage)) { // If language cannot be translated into, use default
-                            c.status(DetectionStatus)
+                        outLang = translation.substring(0, translation.indexOf(' '))
+                        translation = translation.substring(translation.indexOf(' ')+1)
+                        langLog = langLog.replace('??', outLang)
+                        console.log(`\x1b[30;103m${new Date().toISOString()}\x1b[0m Detected language as ${outLang}`)
+
+                        if (!LANGUAGES.includes(outLang)) { // If language cannot be translated into, use default
+                            langStat = LangStatus.NSUPP
                             console.log(`${' '.repeat(DATE_COLS)}But language is sadly unsupported\n`)
-                            endLanguage = DEFAULT_LANG
+                            nspLang = outLang
+                            outLang = DEFAULT_LANG
                         } else { // But if it can be, use it
                             console.log('\n')
                         }
@@ -197,12 +197,34 @@ app.post("/api/scramble", async (c) => {
                         try {
                             console.log(`\x1b[1;91;103m${new Date().toISOString()}\x1b[0m \x1b[1;101m Too many errors in a row, cutting our losses \x1b[0m \n`)
                             
+                            let langFoundBy = ''
+                            switch (langStat) {
+                                case LangStatus.GIVEN:
+                                    langFoundBy = 'Source language provided by client (yay!)'
+                                    break
+                                    
+                                case LangStatus.UNDET:
+                                    langFoundBy = `Source language not recognized, using ${outLang}`
+                                    c.status(DetectionStatus)
+                                    break
+                                    
+                                case LangStatus.DETEC:
+                                    langFoundBy = `Source language detected as ${outLang}`
+                                    break
+                                    
+                                case LangStatus.NSUPP:
+                                    langFoundBy = `Source language detected as ${nspLang}, but was unsupported; using ${outLang}`
+                                    c.status(DetectionStatus)
+                                    break
+                                    
+                            }
+                            
                             c.status(BailedStatus)
                             return c.json({
                                 bamboozled: translation,
                                 original: text,
                                 langs: langLog.split(' > '),
-                                langFoundBy: LANG_INVALID ? (LANG_DETECTED ? `Source language detected as ${endLanguage}` : `Source language not recognized, presumed ${endLanguage}`) : 'Source language provided by client (yay!)',
+                                langFoundBy,
                                 sorry: `${i} of requested ${times} translations were completed`
                             })
                         } catch {
@@ -218,7 +240,7 @@ app.post("/api/scramble", async (c) => {
 
             problemsInARow = 0
 
-// Logging
+/* Logging */
             let DATE = `\x1b[93m${new Date().toISOString()}` // TODO add logging of elapsed time
 
             let LANGLOG = ''
@@ -284,13 +306,33 @@ app.post("/api/scramble", async (c) => {
             console.log(`${DATE} ${LANGLOG} ${PROGRESS} ${TRANSLATION} \x1b[0m`)
         }
 
-        if (LANG_INVALID && !LANG_DETECTED) c.status(DetectionStatus)
+        let langFoundBy = ''
+        switch (langStat) {
+            case LangStatus.GIVEN:
+                langFoundBy = 'Source language provided by client (yay!)'
+                break
+                
+            case LangStatus.UNDET:
+                langFoundBy = `Source language not recognized, using ${outLang}`
+                c.status(DetectionStatus)
+                break
+                
+            case LangStatus.DETEC:
+                langFoundBy = `Source language detected as ${outLang}`
+                break
+                
+            case LangStatus.NSUPP:
+                langFoundBy = `Source language detected as ${nspLang}, but was unsupported; using ${outLang}`
+                c.status(DetectionStatus)
+                break
+                
+        }
 
         return c.json({
             bamboozled: translation,
             original: text,
             langs: langLog.split(' > '),
-            langFoundBy: LANG_INVALID ? (LANG_DETECTED ? `Source language detected as ${endLanguage}` : `Source language not recognized, presumed ${endLanguage}`) : 'Source language provided by client (yay!)'
+            langFoundBy
         })
     } catch (error : any) {
         // If JSON parsing error, blame the customer
