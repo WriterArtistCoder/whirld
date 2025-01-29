@@ -1,5 +1,4 @@
 // TODO Optimize; test performance without some of the bells and whistles
-
 import { serve } from "@hono/node-server"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
@@ -10,22 +9,24 @@ import { HTTPException } from "hono/http-exception"
 import { GoogleTranslate } from "./GoogleCloud/GoogleTranslate"
 import { AxiosError } from "axios"
 
-const app = new Hono()
-const port = parseInt(process.env.PORT || "3193")
-const groot = new GoogleTranslate()
+/* Constants and configuration */
 
-const DEFAULT_LANG = 'en' // Fallback language if source language cannot be used
+const OkStatus = 200 as StatusCode                  // Happy day!
+const OvercameStatus = 222 as UnofficialStatusCode  // Aborts encountered but overcome (TODO use 200; user doesnt care)
+const DetectionStatus = 288 as UnofficialStatusCode // Source language not detected or not supported, using fallback
+const BailedStatus = 299 as UnofficialStatusCode    // Too many aborts in a row, had to bail and submit unfinished work
+const InvalidStatus = 400 as StatusCode             // Client made invalid request
+const TeapotStatus = 418 as StatusCode              // I am a teapot
+const RIPStatus = 500 as StatusCode                 // Cannot recover; just lay down and cry
+
+const FALLBACK_LANG = 'en' // Fallback language if source language cannot be used
 const LANGUAGES = ['af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs', 'bg', 'ca', 'ceb', 'zh', 'zh-TW', 'co', 'hr', 'cs', 'da', 'nl', 'en', 'eo', 'et', 'fi', 'fr', 'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'he', 'hi', 'hmn', 'hu', 'is', 'ig', 'id', 'ga', 'it', 'ja', 'jv', 'kn', 'kk', 'km', 'rw', 'ko', 'ku', 'ky', 'lo', 'lv', 'lt', 'lb', 'mk', 'mg', 'ms', 'ml', 'mt', 'mi', 'mr', 'mn', 'my', 'ne', 'no', 'ny', 'or', 'ps', 'fa', 'pl', 'pt', 'pa', 'ro', 'ru', 'sm', 'gd', 'sr', 'st', 'sn', 'sd', 'si', 'sk', 'sl', 'so', 'es', 'su', 'sw', 'sv', 'tl', 'tg', 'ta', 'tt', 'te', 'th', 'tr', 'tk', 'uk', 'ur', 'ug', 'uz', 'vi', 'cy', 'xh', 'yi', 'yo', 'zu'];
 const OH_CRAP_LIMIT = 5 // Fold after 5 consecutive unsuccessful translations
 const TIMEOUT_AFTER = 1000 * 120 // Time out after 2 minutes
 
-const OkStatus = 200 as StatusCode                  // Happy day!
-const OvercameStatus = 222 as UnofficialStatusCode  // Errors encountered but overcome (TODO use 200; user doesnt care)
-const DetectionStatus = 288 as UnofficialStatusCode // Source language not detected or cannot be translated into, using default lang
-const BailedStatus = 299 as UnofficialStatusCode    // Too many errors in a row, had to bail and submit unfinished work
-const USuckStatus = 400 as StatusCode               // It's your fault
-const TeapotStatus = 418 as StatusCode              // I am a teapot
-const RIPStatus = 500 as StatusCode                 // Died
+const app = new Hono()
+const port = parseInt(process.env.PORT || "3193")
+const groot = new GoogleTranslate()
 
 /* Logging */
 
@@ -36,7 +37,7 @@ enum Pref {
     SOME,
     REDACT
 }
-const WHAT_TO_LOG = { // TODO set this through flags
+const WHAT_TO_LOG = { // TODO set this through command line flags
     languages: Pref.SOME,
     progress: Pref.ALL,
     translation: Pref.SOME
@@ -44,10 +45,10 @@ const WHAT_TO_LOG = { // TODO set this through flags
 const ANSI_LOGGING = true // Turn on/off ANSI formatting escape codes
 
 // Log to file as well as stdout
-var fs = require('fs')
-var util = require('util')
-var logFile = fs.createWriteStream('annals.txt', { flags: 'a' })
-var logStdout = process.stdout
+const fs = require('fs')
+const util = require('util')
+const logFile = fs.createWriteStream('annals.txt', { flags: 'a' })
+const logStdout = process.stdout
 
 console.log = function () {
     // Write to file, stripping ANSI formatting
@@ -58,6 +59,8 @@ console.log = function () {
     else logStdout.write(util.format.apply(null, arguments).replace(/\x1b\[[0-9;]+m/g, '') + '\n')
 }
 console.error = console.log
+
+/* REST */
 
 // Enable CORS
 app.use("/*", cors())
@@ -87,29 +90,29 @@ app.get("/api/scramble", async (c) => {
         `)
 })
 
-/* Scramble a text */
+// Scramble a text
 
 // TODO Enable timeout, make sure it doesn't keep running after returning HTTP 408
 // app.use("/api/scramble", timeout(TIMEOUT_AFTER, new HTTPException(408)))
 
+// TODO handle simultaneous requests (assign ID?)
+
+// TODO Make API more orthodox in its error handling
+
 app.post("/api/scramble", async (c) => {
-    c.status(OkStatus)
-    console.log(`\x1b[1m  \n\n\n\x1b[93m${new Date().toISOString()}\x1b[0m POST /api/scramble`)
-
-    // TODO handle simultaneous requests (assign ID?)
-
-    // TODO Make API more orthodox in its error handling
+    console.log(`\x1b[1m  \n\n\n\x1b[93m${new Date().toISOString()}\x1b[0;1m POST /api/scramble \x1b[0m`)
+    c.status(OkStatus) // Assume success
     
     try {
-/* Validation */
+ /* Validation */
         // TODO Sanitize body
         const { lang, text, times } = await c.req.json()
 
         enum LangStatus {
             GIVEN, // Valid language was given by client
-            UNDET, // Language invalid, and not yet detected
+            UNDET, // Language invalid, not yet detected
             DETEC, // Language detected
-            NSUPP  // Langauge detected but unsupported
+            NSUPP  // Langauge detected but unsupported; use fallback lang
         }
         let langStat = LangStatus.GIVEN
         let langLog  = lang // List of languages used
@@ -117,13 +120,13 @@ app.post("/api/scramble", async (c) => {
         let outLang  = lang // Language to return translation in
         let nspLang  = ''   // If NSUPP, store unsupported language here
 
-        // If lang invalid, use placeholders
+        // If lang invalid, use placeholders, we'll try to detect it later
         if (!(typeof lang === 'string') || !LANGUAGES.includes(lang))
-            langStat = LangStatus.UNDET, langLog = '??', prevLang = undefined, outLang = DEFAULT_LANG
+            langStat = LangStatus.UNDET, langLog = '??', prevLang = undefined, outLang = FALLBACK_LANG
 
         // HTTP 400 if text invalid
         if (!(typeof text === 'string')) {
-            c.status(USuckStatus)
+            c.status(InvalidStatus)
             return c.json({
                 forshame: '"text" property should be a string'
             })
@@ -131,72 +134,75 @@ app.post("/api/scramble", async (c) => {
 
         // HTTP 400 if times invalid
         if (!Number.isInteger(times) || times<2) {
-            c.status(USuckStatus)
+            c.status(InvalidStatus)
             return c.json({
                 forshame: '"times" property should be a number, 2 or more'
             })
         } else if (times>500) {
-            c.status(USuckStatus)
+            c.status(InvalidStatus)
             return c.json({
                 forshame: '"times" property should be a number, 500 or less'
             })
         }
 
-/* Translation */
-        let totalProblems = 0, problemsInARow = 0
+ /* Translation */
+        let totalAborts = 0, abortsInARow = 0
         let translation = text
 
         for (var i = 0; i < times+1; i++) {
             if (i>0) {
+                // Pick random lang, or if is last translation, translate into output lang
                 let nextLang = i==times ? outLang : LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
                 langLog += ' > ' + nextLang
                 
                 try {
+                    // Perform a translation
                     translation = await groot.translateText(translation, nextLang, prevLang)
+
+                    // If lang not yet detected
                     if (langStat == LangStatus.UNDET) {
                         // TODO handle Google Translate not detecting a language at all
                         // Extract detected language
                         langStat = LangStatus.DETEC
-
                         outLang = translation.substring(0, translation.indexOf(' '))
                         translation = translation.substring(translation.indexOf(' ')+1)
                         langLog = langLog.replace('??', outLang)
+
                         console.log(`\x1b[30;103m${new Date().toISOString()}\x1b[0m Detected language as ${outLang}`)
 
-                        if (!LANGUAGES.includes(outLang)) { // If language cannot be translated into, use default
-                            langStat = LangStatus.NSUPP
-                            console.log(`${' '.repeat(DATE_COLS)}But language is sadly unsupported\n`)
-                            nspLang = outLang
-                            outLang = DEFAULT_LANG
-                        } else { // But if it can be, use it
-                            console.log('\n')
+                        if (!LANGUAGES.includes(outLang)) { // If lang unsupported, use fallback
+                            console.log(`${' '.repeat(DATE_COLS)}But language is sadly unsupported`)
+                            langStat = LangStatus.NSUPP, nspLang = outLang, outLang = FALLBACK_LANG
                         }
+                        console.log('\n')
                     }
 
                 } catch (e) {
-                    totalProblems++
-                    c.status(OvercameStatus)
+                    totalAborts++
+                    c.status(OvercameStatus) // Reflect in HTTP status that there was an abort
 
                     // Log that there was an error (TODO get to the bottom of these errors)
                     console.log(`\x1b[30;103m${new Date().toISOString()}\x1b[0m \x1b[30;101m Unexpected error \x1b[0;91m`)
                     if (e instanceof AxiosError) {
+                        // If it's an AxiosError, figure out why Google is mad
                         console.error(e.message)
                         console.error(e.response?.data?.error)
                     } else if (e instanceof Error) {
+                        // Otherwise, we have no idea. Just log the whole thing
                         console.error(e.message)
                         console.error(e)
                     }
                     console.log('\x1b[0m\n')
 
-                    if (++problemsInARow < OH_CRAP_LIMIT) {
-                        // Reset and try again
+                    if (++abortsInARow < OH_CRAP_LIMIT) {
+                        // Try again, selecting a new random language
                         nextLang = prevLang||''; i--; continue
                     } else {
-                        // Give up if there were too many problems in a row
-
+                        // Give up if there were too many aborts in a row
                         try {
                             console.log(`\x1b[1;91;103m${new Date().toISOString()}\x1b[0m \x1b[1;101m Too many errors in a row, cutting our losses \x1b[0m \n`)
                             
+                            // Tell the client how output language was decided
                             let langFoundBy = ''
                             switch (langStat) {
                                 case LangStatus.GIVEN:
@@ -219,6 +225,7 @@ app.post("/api/scramble", async (c) => {
                                     
                             }
                             
+                            // Return what we have so far, which is probably in the wrong language
                             c.status(BailedStatus)
                             return c.json({
                                 bamboozled: translation,
@@ -228,6 +235,7 @@ app.post("/api/scramble", async (c) => {
                                 sorry: `${i} of requested ${times} translations were completed`
                             })
                         } catch {
+                            // If even that didn't work, lose all hope
                             c.status(RIPStatus)
                             return c.json({
                                 sorry: "Sorry"
@@ -238,9 +246,9 @@ app.post("/api/scramble", async (c) => {
                 prevLang = nextLang
             }
 
-            problemsInARow = 0
+            abortsInARow = 0
 
-/* Logging */
+ /* Logging */
             let DATE = `\x1b[93m${new Date().toISOString()}` // TODO add logging of elapsed time
 
             let LANGLOG = ''
@@ -277,8 +285,8 @@ app.post("/api/scramble", async (c) => {
                 case Pref.ALL:
                     PROGRESS += i==times ? '\x1b[38;5;118m' : '\x1b[31m'
                     PROGRESS += ` \n${i}/${times} (${(100*i/times).toFixed(1)}%)`
-                    if (totalProblems>0) PROGRESS += ` +${totalProblems} aborted attempt`
-                    if (totalProblems>1) PROGRESS += 's'
+                    if (totalAborts>0) PROGRESS += ` +${totalAborts} aborted attempt`
+                    if (totalAborts>1) PROGRESS += 's'
                     break
             }
 
@@ -306,6 +314,8 @@ app.post("/api/scramble", async (c) => {
             console.log(`${DATE} ${LANGLOG} ${PROGRESS} ${TRANSLATION} \x1b[0m`)
         }
 
+ /* All done! */
+        // Tell the client how output language was decided
         let langFoundBy = ''
         switch (langStat) {
             case LangStatus.GIVEN:
@@ -325,9 +335,7 @@ app.post("/api/scramble", async (c) => {
                 langFoundBy = `Source language detected as ${nspLang}, but was unsupported; using ${outLang}`
                 c.status(DetectionStatus)
                 break
-                
         }
-
         return c.json({
             bamboozled: translation,
             original: text,
@@ -338,7 +346,7 @@ app.post("/api/scramble", async (c) => {
         // If JSON parsing error, blame the customer
         if (error instanceof SyntaxError && error.message.startsWith('JSON Parse')) {
             console.error(error)
-            c.status(USuckStatus)
+            c.status(InvalidStatus)
             return c.json({
                 "forshame": "Invalid JSON"
             })
