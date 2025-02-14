@@ -17,8 +17,8 @@ const App: React.FC = () => {
     try {
       try {
         const translation = await translateText(
-          currentText,
           'en',
+          currentText,
           5
         )
 
