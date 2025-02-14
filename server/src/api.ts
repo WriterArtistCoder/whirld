@@ -71,7 +71,7 @@ app.use("/*", cors(
 ))
 
 // Welcome screen
-app.get("/api/scramble", async (c) => {
+app.get("/", async (c) => {
     c.status(TeapotStatus)
     return c.html(`
 <!DOCTYPE html>
