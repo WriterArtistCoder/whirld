@@ -63,8 +63,12 @@ console.error = console.log
 
 /* REST */
 
-// Enable CORS
-app.use("/*", cors())
+// Enable CORS, allow only client port
+app.use("/*", cors(
+    {
+        origin: 'http://localhost:3000'
+    }
+))
 
 // Welcome screen
 app.get("/api/scramble", async (c) => {

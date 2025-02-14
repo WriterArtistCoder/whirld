@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import InputPanel from './components/InputPanel/InputPanel';
 import OutputPanel from './components/OutputPanel';
-// import { getRandomLanguage, translateText } from './utils/translator'
-import { GoogleTranslate } from './GoogleCloud/GoogleTranslate'
+import { translateText } from './utils/translator'
 
 const App: React.FC = () => {
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
   const [isTranslating, setIsTranslating] = useState(false);
-  
-  const translator = new GoogleTranslate();
 
   const handleScramble = async () => {
     if (!inputText.trim() || isTranslating) return;
@@ -18,28 +15,16 @@ const App: React.FC = () => {
     let currentText = inputText;
 
     try {
-      for (let i = 0; i < 20; i++) {
-        const randomLang = "fr"
-        console.log(`en > ${randomLang} > en`)
+      try {
+        const translation = await translateText(
+          currentText,
+          'en',
+          5
+        )
 
-        try {
-          // Translate from English to French
-          const translation = await translator.translateText(
-            currentText,
-            'en',
-            randomLang
-          );
-
-          const translationBack = await translator.translateText(
-            translation,
-            randomLang,
-            'en'
-          );
-
-          setOutputText(translationBack)
-        } catch {
-          console.log('Translation error =(')
-        }
+        setOutputText(translation)
+      } catch {
+        console.log('Translation error =(')
       }
     } catch (error) {
       console.error('Translation error:', error);
