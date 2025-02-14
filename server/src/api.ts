@@ -11,16 +11,17 @@ import { AxiosError } from "axios"
 
 /* Constants and configuration */
 
-const OkStatus = 200 as StatusCode                  // Happy day!
-const OvercameStatus = 222 as UnofficialStatusCode  // Aborts encountered but overcome (TODO use 200; user doesnt care)
+const OkStatus        = 200 as StatusCode           // Happy day!
+const OvercameStatus  = 222 as UnofficialStatusCode // Aborts encountered but overcome (TODO use 200; user doesnt care)
 const DetectionStatus = 288 as UnofficialStatusCode // Source language not detected or not supported, using fallback
-const BailedStatus = 299 as UnofficialStatusCode    // Too many aborts in a row, had to bail and submit unfinished work
-const InvalidStatus = 400 as StatusCode             // Client made invalid request
-const TeapotStatus = 418 as StatusCode              // I am a teapot
-const RIPStatus = 500 as StatusCode                 // Cannot recover; just lay down and cry
+const BailedStatus    = 299 as UnofficialStatusCode // Too many aborts in a row, had to bail and submit unfinished work
+const InvalidStatus   = 400 as StatusCode           // Client made invalid request
+const TeapotStatus    = 418 as StatusCode           // I am a teapot
+const RIPStatus       = 500 as StatusCode           // Cannot recover; just lay down and cry
 
 const FALLBACK_LANG = 'en' // Fallback language if source language cannot be used
-const LANGUAGES = ['af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs', 'bg', 'ca', 'ceb', 'zh', 'zh-TW', 'co', 'hr', 'cs', 'da', 'nl', 'en', 'eo', 'et', 'fi', 'fr', 'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'he', 'hi', 'hmn', 'hu', 'is', 'ig', 'id', 'ga', 'it', 'ja', 'jv', 'kn', 'kk', 'km', 'rw', 'ko', 'ku', 'ky', 'lo', 'lv', 'lt', 'lb', 'mk', 'mg', 'ms', 'ml', 'mt', 'mi', 'mr', 'mn', 'my', 'ne', 'no', 'ny', 'or', 'ps', 'fa', 'pl', 'pt', 'pa', 'ro', 'ru', 'sm', 'gd', 'sr', 'st', 'sn', 'sd', 'si', 'sk', 'sl', 'so', 'es', 'su', 'sw', 'sv', 'tl', 'tg', 'ta', 'tt', 'te', 'th', 'tr', 'tk', 'uk', 'ur', 'ug', 'uz', 'vi', 'cy', 'xh', 'yi', 'yo', 'zu'];
+const LANGUAGES = [ // TODO Update automatically https://cloud.google.com/translate/docs/basic/discovering-supported-languages
+    'af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs', 'bg', 'ca', 'ceb', 'zh', 'zh-TW', 'co', 'hr', 'cs', 'da', 'nl', 'en', 'eo', 'et', 'fi', 'fr', 'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'he', 'hi', 'hmn', 'hu', 'is', 'ig', 'id', 'ga', 'it', 'ja', 'jv', 'kn', 'kk', 'km', 'rw', 'ko', 'ku', 'ky', 'lo', 'lv', 'lt', 'lb', 'mk', 'mg', 'ms', 'ml', 'mt', 'mi', 'mr', 'mn', 'my', 'ne', 'no', 'ny', 'or', 'ps', 'fa', 'pl', 'pt', 'pa', 'ro', 'ru', 'sm', 'gd', 'sr', 'st', 'sn', 'sd', 'si', 'sk', 'sl', 'so', 'es', 'su', 'sw', 'sv', 'tl', 'tg', 'ta', 'tt', 'te', 'th', 'tr', 'tk', 'uk', 'ur', 'ug', 'uz', 'vi', 'cy', 'xh', 'yi', 'yo', 'zu']
 const OH_CRAP_LIMIT = 5 // Fold after 5 consecutive unsuccessful translations
 const TIMEOUT_AFTER = 1000 * 120 // Time out after 2 minutes
 
@@ -42,7 +43,7 @@ const WHAT_TO_LOG = { // TODO set this through command line flags
     progress: Pref.ALL,
     translation: Pref.SOME
 }
-const ANSI_LOGGING = true // Turn on/off ANSI formatting escape codes
+const ANSI_LOGGING = true // Toggle ANSI formatting
 
 // Log to file as well as stdout
 const fs = require('fs')
@@ -149,12 +150,16 @@ app.post("/api/scramble", async (c) => {
         let totalAborts = 0, abortsInARow = 0
         let translation = text
 
-        for (var i = 0; i < times+1; i++) {
+        TRANSLATE: for (var i = 0; i < times+1; i++) {
             if (i>0) {
                 // Pick random lang, or if is last translation, translate into output lang
                 let nextLang = i==times ? outLang : LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
-                langLog += ' > ' + nextLang
+                while (((i<times) && (nextLang == prevLang)) || // Don't pick same language, this is not accepted   (... > af > AF > ...)
+                      ((i==times-1) && nextLang == outLang))  // Don't pick output lang for penultimate translation (... > fr > EN > en)
+                    console.log('Uh oh', nextLang = LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))])
                 
+                langLog += ' > ' + nextLang
+
                 try {
                     // Perform a translation
                     translation = await groot.translateText(translation, nextLang, prevLang)
