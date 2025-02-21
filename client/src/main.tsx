@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import InputPanel from './components/InputPanel/InputPanel';
-import OutputPanel from './components/OutputPanel';
 import { translateText } from './utils/translator'
 
 const App: React.FC = () => {
@@ -13,6 +12,7 @@ const App: React.FC = () => {
     
     setIsTranslating(true);
     let currentText = inputText;
+    document.querySelector('section')?.classList.add('displayBothPanels')
 
     try {
       try {
@@ -49,28 +49,23 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      <header className="text-center py-8">
-        <h1 className="text-4xl font-bold mb-2">🌎 Whirld 🌏</h1>
-        <p className="text-xl text-gray-600">Translate anything too many times!</p>
+    <div>
+      <header>
+        <h1>🌎 Whirld 🌏</h1>
+        <p>Translate anything too many times!</p>
       </header>
 
-      <main className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
+      <main>
+        <div>
           <InputPanel
             text={inputText}
             onChange={setInputText}
             onScramble={handleScramble}
             isTranslating={isTranslating}
+
+            translatedText={outputText}
+            onCopy={handleCopy}
           />
-          
-          {outputText && (
-            <OutputPanel
-              originalText={inputText}
-              translatedText={outputText}
-              onCopy={handleCopy}
-            />
-          )}
         </div>
       </main>
     </div>

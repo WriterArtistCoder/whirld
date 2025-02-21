@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
+
+/* TODO Use em instead of px */
+
+section {
+  display: grid;
+  grid-template-columns: 100% auto;
+  transition: 250ms;
+  width: 75%;
+  margin: auto;
+}
+
+section.displayBothPanels {
+  grid-template-columns: 50% auto;
+}
+
+.inputPanel {
+  flex: 0 0 700px;
+  height: 165px;
+  margin: 0;
+  padding: 10px;
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+
+  background: rgb(211, 244, 255);
+  color: #1339b4;
+  border: #31cfff solid 5px;
+  resize: none;
+
+  font-family: 'Oxygen Mono', monospace;
+}
+
+.outputPanel {
+  display: none;
+  grid-column: 2 / span 2;
+  grid-row: 1 / span 1;
+}
+
+.displayBothPanels .outputPanel {
+  display: block;
+  flex: 0 0 700px;
+  height: 165px;
+  margin: 0;
+  padding: 10px;
+
+  background: rgb(220, 255, 211);
+  color: #13b4b1;
+  border: #1b951d solid 5px;
+  resize: none;
+
+  font-family: 'Oxygen Mono', monospace;
+}
+
+textarea:focus {
+  border-color: #fff;
+  outline: none !important;
+}
+
+button {
+  padding: 20px;
+  background: #1339b4;
+  transition: background-color;
+  transition-duration: .1s;
+  color: white;
+  border: none;
+  outline: none;
+
+  font-family: 'Oxygen Mono', monospace;
+  text-transform: uppercase;
+}
+
+button:focus {
+  background: rgb(130, 130, 255);
+}
+
+.inputButton {
+  margin-top: 10px;
+  /* TODO Turn button into progress bar */
+  /* background: linear-gradient(90deg, blue 90%, cyan 90%); */
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+}
+
+.outputButton {
+  display: none;
+  margin-top: 10px;
+  grid-column: 2 / span 2;
+  grid-row: 2 / span 1;
+
+  background: #1b951d;
+}
+
+.displayBothPanels .outputButton {
+  display: block;
+}
+
+.outputButton:focus {
+  background: rgb(31, 189, 36);
+}
