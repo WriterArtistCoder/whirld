@@ -64,251 +64,20 @@ wss.on('connection', function connection(ws : WebSocket) {
 
     console.log(`\x1b[1m  \n\n\n\x1b[93m${new Date().toISOString()}\x1b[0;1m New WebSocket connection \x1b[0m`)
 
-    // Handle incoming messages
-    ws.on('message', async function incoming(message : { lang : string, text : string, times : number }) {
-        // Scramble a text
-
+    // Handle incoming messages: scramble text
+    ws.on('message', async function incoming(message : string) {
         console.log(`\x1b[1m  \n\n\n\x1b[93m${new Date().toISOString()}\x1b[0;1m POST /api/scramble \x1b[0m`)
     
+        let lang, text, times
+
+/* Validation */
         try {
-        /* Validation */
             // TODO Sanitize body
             const parsedMessage = JSON.parse(message.toString())
-            const { lang, text, times } = parsedMessage
-       
-            enum LangStatus {
-                GIVEN, // Valid language was given by client
-                UNDET, // Language invalid, not yet detected
-                DETEC, // Language detected
-                NSUPP  // Langauge detected but unsupported; use fallback lang
-            }
-            let langStat = LangStatus.GIVEN
-            let langLog  = lang // List of languages used
-            let prevLang = lang // Current language of translated text
-            let outLang  = lang // Language to return translation in
-            let nspLang  = ''   // If NSUPP, store unsupported language here
-       
-            // If lang invalid, use placeholders, we'll try to detect it later
-            if (!(typeof lang === 'string') || !LANGUAGES.includes(lang))
-                langStat = LangStatus.UNDET, langLog = '??', prevLang = undefined, outLang = FALLBACK_LANG
-    
-            // HTTP 400 if text invalid
-            if (!(typeof text === 'string')) {
-                scream({
-                    error: '"text" property should be a string'
-                })
-                return
-            }
-    
-            // HTTP 400 if times invalid
-            if (!Number.isInteger(times) || times<2) {
-                scream({
-                    error: '"times" property should be a number, 2 or more'
-                })
-                return
-            } else if (times>500) {
-                scream({
-                    error: '"times" property should be a number, 500 or less'
-                })
-                return
-            }
-    
-    /* Translation */
-            let totalAborts = 0, abortsInARow = 0
-            let translation = text
-    
-            TRANSLATE: for (var i = 0; i < times+1; i++) {
-                if (i>0) {
-                    // Pick random lang, or if is last translation, translate into output lang
-                    let nextLang = i==times ? outLang : LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
-                    while (((i<times) && (nextLang == prevLang)) || // Don't pick same language, this is not accepted   (... > af > AF > ...)
-                            ((i==times-1) && nextLang == outLang))  // Don't pick output lang for penultimate translation (... > fr > EN > en)
-                        console.log('Uh oh', nextLang = LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))])
-                    
-                    langLog += ' > ' + nextLang
-    
-                    try {
-                        // Perform a translation
-                        translation = await gt.translateText(translation, nextLang, prevLang)
-    
-                        // If lang not yet detected
-                        if (langStat == LangStatus.UNDET) {
-                            // TODO handle Google Translate not detecting a language at all
-                            // Extract detected language
-                            langStat = LangStatus.DETEC
-                            outLang = translation.substring(0, translation.indexOf(' '))
-                            translation = translation.substring(translation.indexOf(' ')+1)
-                            langLog = langLog.replace('??', outLang)
-    
-                            console.log(`\x1b[30;103m${new Date().toISOString()}\x1b[0m Detected language as ${outLang}`)
-    
-                            if (!LANGUAGES.includes(outLang)) { // If lang unsupported, use fallback
-                                console.log(`${' '.repeat(DATE_COLS)}But language is sadly unsupported`)
-                                langStat = LangStatus.NSUPP, nspLang = outLang, outLang = FALLBACK_LANG
-                            }
-                            console.log('\n')
-                        }
-    
-                    } catch (e) {
-                        totalAborts++
-                            
-                        // Log that there was an error
-                        console.log(`\x1b[30;103m${new Date().toISOString()}\x1b[0m \x1b[30;101m Unexpected error \x1b[0;91m`)
-                        if (e instanceof AxiosError) {
-                            // If it's an AxiosError, figure out why Google is mad
-                            console.error(e.message)
-                            console.error(e.response?.data?.error)
-                        } else if (e instanceof Error) {
-                            // Otherwise, we have no idea. Just log the whole thing
-                            console.error(e.message)
-                            console.error(e)
-                        }
-                        console.log('\x1b[0m\n')
-    
-                        if (++abortsInARow < OH_CRAP_LIMIT) {
-                            // Try again, selecting a new random language
-                            nextLang = prevLang||''; i--; continue
-                        } else {
-                            // Give up if there were too many aborts in a row
-                            try {
-                                console.log(`\x1b[1;91;103m${new Date().toISOString()}\x1b[0m \x1b[1;101m Too many errors in a row, cutting our losses \x1b[0m \n`)
-                                
-                                // Tell the client how output language was decided
-                                let langFoundBy = ''
-                                switch (+langStat) {
-                                    case LangStatus.GIVEN:
-                                        langFoundBy = 'Source language provided by client (yay!)'
-                                        break
-                                        
-                                    case LangStatus.UNDET:
-                                        langFoundBy = `Source language not recognized, using ${outLang}`
-                                        break
-                                        
-                                    case LangStatus.DETEC:
-                                        langFoundBy = `Source language detected as ${outLang}`
-                                        break
-                                        
-                                    case LangStatus.NSUPP:
-                                        langFoundBy = `Source language detected as ${nspLang}, but was unsupported; using ${outLang}`
-                                        break
-                                }
-                                
-                                // Return what we have so far, which is probably in the wrong language
-                                scream({
-                                    bamboozled: translation,
-                                    original: text,
-                                    langs: langLog.split(' > '),
-                                    langFoundBy,
-                                    error: `${i} of requested ${times} translations were completed`
-                                })
-                                return
-                            } catch {
-                                // If even that didn't work, lose all hope
-                                scream({
-                                    error: "Sorry"
-                                })
-                                return
-                            }
-                        }
-                    }
-                    prevLang = nextLang
-                }
-    
-                abortsInARow = 0
-    
-    /* Logging */
-                let DATE = `\x1b[93m${new Date().toISOString()}` // TODO add logging of elapsed time
-    
-                let LANGLOG = ''
-    
-                switch (WHAT_TO_LOG.languages) {
-                    case Pref.SOME:
-                        if (langLog.length > TERMINAL_COLS-DATE_COLS) {
-                            // Original language (highlight in green)
-                            const ll1 = langLog.substring(0, langLog.indexOf(' > ')) + ' > ... >'
-    
-                            // Most recent translation (e.g. en > fr), highlighted in white
-                            const ll2 = langLog.substring(langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
-    
-                            LANGLOG = `\x1b[92m${ll1}\x1b[0m${ll2}`
-                            break
-                        }
-    
-                    case Pref.ALL:
-                        // Languages used so far, up to most recent translation (highlight in green)
-                        const ll1 = i<2 ? '' : langLog.substring(0, langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
-                        
-                        // Most recent translation (e.g. en > fr), highlighted in white
-                        const ll2 = i<2 ? langLog : langLog.substring(langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
-                        
-                        LANGLOG = `\x1b[92m${ll1}\x1b[0m${ll2}`
-                        break
-                }
-    
-                let PROGRESS = ''
-                switch (WHAT_TO_LOG.progress) {
-                    case Pref.SOME:
-                        PROGRESS = `\x1b[35m \n${i}/${times}`
-                        break
-                    case Pref.ALL:
-                        PROGRESS += i==times ? '\x1b[38;5;118m' : '\x1b[31m'
-                        PROGRESS += ` \n${i}/${times} (${(100*i/times).toFixed(1)}%)`
-                        if (totalAborts>0) PROGRESS += ` +${totalAborts} aborted attempt`
-                        if (totalAborts>1) PROGRESS += 's'
-                        break
-                }
-    
-                PROGRESS += '\x1b[0m'
-    
-                let TRANSLATION = '\n'
-                switch (WHAT_TO_LOG.translation) {
-                    case Pref.SOME:
-                        // Reduce to one line (doesn't work for larger width charcaters, such as CJK block)
-                        TRANSLATION = (translation.replaceAll('\n', ' ')).substring(0, TERMINAL_COLS-1) + '…'
-    
-                        // Formatting
-                        TRANSLATION = `\n \x1b[34m${TRANSLATION}\n`
-                        break
-                    
-                    case Pref.ALL:
-                        TRANSLATION = `\n \x1b[34m${translation}\n`
-                        break
-                }
-    
-                // Date (yellow)
-                //        Languages (green and white)
-                //                              Progress (red)
-                //                                          Translation (blue)
-                console.log(`${DATE} ${LANGLOG} ${PROGRESS} ${TRANSLATION} \x1b[0m`)
-            }
-    
-    /* All done! */
-            // Tell the client how output language was decided
-            let langFoundBy = ''
-            switch (+langStat) {
-                case LangStatus.GIVEN:
-                    langFoundBy = 'Source language provided by client (yay!)'
-                    break
-                    
-                case LangStatus.UNDET:
-                    langFoundBy = `Source language not recognized, using ${outLang}`
-                                        break
-                    
-                case LangStatus.DETEC:
-                    langFoundBy = `Source language detected as ${outLang}`
-                    break
-                    
-                case LangStatus.NSUPP:
-                    langFoundBy = `Source language detected as ${nspLang}, but was unsupported; using ${outLang}`
-                                        break
-            }
-            scream({
-                bamboozled: translation,
-                original: text,
-                langs: langLog.split(' > '),
-                langFoundBy
-            })
-            return
+
+            lang = parsedMessage.lang
+            text =  parsedMessage.text
+            times = parsedMessage.times
         } catch (error : any) {
             // If JSON parsing error, blame the customer
             if (error instanceof SyntaxError && error.message.startsWith('JSON Parse')) {
@@ -321,6 +90,240 @@ wss.on('connection', function connection(ws : WebSocket) {
             // Otherwise, PANIIIICCC
             else throw error
         }
+       
+        enum LangStatus {
+            GIVEN, // Valid language was given by client
+            UNDET, // Language invalid, not yet detected
+            DETEC, // Language detected
+            NSUPP  // Langauge detected but unsupported; use fallback lang
+        }
+        let langStat = LangStatus.GIVEN
+        let langLog  = lang // List of languages used
+        let prevLang = lang // Current language of translated text
+        let outLang  = lang // Language to return translation in
+        let nspLang  = ''   // If NSUPP, store unsupported language here
+    
+        // If lang invalid, use placeholders, we'll try to detect it later
+        if (!(typeof lang === 'string') || !LANGUAGES.includes(lang))
+            langStat = LangStatus.UNDET, langLog = '??', prevLang = undefined, outLang = FALLBACK_LANG
+
+        // HTTP 400 if text invalid
+        if (!(typeof text === 'string')) {
+            scream({
+                error: '"text" property should be a string'
+            })
+            return
+        }
+
+        // HTTP 400 if times invalid
+        if (!Number.isInteger(times) || times<2) {
+            scream({
+                error: '"times" property should be a number, 2 or more'
+            })
+            return
+        } else if (times>500) {
+            scream({
+                error: '"times" property should be a number, 500 or less'
+            })
+            return
+        }
+
+/* Translation */
+        let totalAborts = 0, abortsInARow = 0
+        let translation = text
+
+        for (var i = 0; i < times+1; i++) {
+            if (i>0) {
+                // Pick random lang, or if is last translation, translate into output lang
+                let nextLang = i==times ? outLang : LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
+                while (((i<times) && (nextLang == prevLang)) || // Don't pick same language, this is not accepted     (... > af > AF > ...)
+                        ((i==times-1) && nextLang == outLang))  // Don't pick output lang for penultimate translation (... > fr > EN > en)
+                    console.log('Uh oh', nextLang = LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))])
+                
+                langLog += ' > ' + nextLang
+
+                try {
+                    // Perform a translation
+                    translation = await gt.translateText(translation, nextLang, prevLang)
+
+                    // If lang not yet detected
+                    if (langStat == LangStatus.UNDET) {
+                        // TODO handle Google Translate not detecting a language at all
+                        // Extract detected language
+                        langStat = LangStatus.DETEC
+                        outLang = translation.substring(0, translation.indexOf(' '))
+                        translation = translation.substring(translation.indexOf(' ')+1)
+                        langLog = langLog.replace('??', outLang)
+
+                        console.log(`\x1b[30;103m${new Date().toISOString()}\x1b[0m Detected language as ${outLang}`)
+
+                        if (!LANGUAGES.includes(outLang)) { // If lang unsupported, use fallback
+                            console.log(`${' '.repeat(DATE_COLS)}But language is sadly unsupported`)
+                            langStat = LangStatus.NSUPP, nspLang = outLang, outLang = FALLBACK_LANG
+                        }
+                        console.log('\n')
+                    }
+
+                } catch (e) {
+                    totalAborts++
+                        
+                    // Log that there was an error
+                    console.log(`\x1b[30;103m${new Date().toISOString()}\x1b[0m \x1b[30;101m Unexpected error \x1b[0;91m`)
+                    if (e instanceof AxiosError) {
+                        // If it's an AxiosError, figure out why Google is mad
+                        console.error(e.message)
+                        console.error(e.response?.data?.error)
+                    } else if (e instanceof Error) {
+                        // Otherwise, we have no idea. Just log the whole thing
+                        console.error(e.message)
+                        console.error(e)
+                    }
+                    console.log('\x1b[0m\n')
+
+                    if (++abortsInARow < OH_CRAP_LIMIT) {
+                        // Try again, selecting a new random language
+                        nextLang = prevLang||''; i--; continue
+                    } else {
+                        // Give up if there were too many aborts in a row
+                        try {
+                            console.log(`\x1b[1;91;103m${new Date().toISOString()}\x1b[0m \x1b[1;101m Too many errors in a row, cutting our losses \x1b[0m \n`)
+                            
+                            // Tell the client how output language was decided
+                            let langFoundBy = ''
+                            switch (+langStat) {
+                                case LangStatus.GIVEN:
+                                    langFoundBy = 'Source language provided by client (yay!)'
+                                    break
+                                    
+                                case LangStatus.UNDET:
+                                    langFoundBy = `Source language not recognized, using ${outLang}`
+                                    break
+                                    
+                                case LangStatus.DETEC:
+                                    langFoundBy = `Source language detected as ${outLang}`
+                                    break
+                                    
+                                case LangStatus.NSUPP:
+                                    langFoundBy = `Source language detected as ${nspLang}, but was unsupported; using ${outLang}`
+                                    break
+                            }
+                            
+                            // Return what we have so far, which is probably in the wrong language
+                            scream({
+                                bamboozled: translation,
+                                original: text,
+                                langs: langLog.split(' > '),
+                                langFoundBy,
+                                error: `${i} of requested ${times} translations were completed`
+                            })
+                            return
+                        } catch {
+                            // If even that didn't work, lose all hope
+                            scream({
+                                error: "Sorry"
+                            })
+                            return
+                        }
+                    }
+                }
+                prevLang = nextLang
+            }
+
+            abortsInARow = 0
+
+/* Logging */
+            let DATE = `\x1b[93m${new Date().toISOString()}` // TODO add logging of elapsed time
+
+            let LANGLOG = ''
+
+            switch (WHAT_TO_LOG.languages) {
+                case Pref.SOME:
+                    if (langLog.length > TERMINAL_COLS-DATE_COLS) {
+                        // Original language (highlight in green)
+                        const ll1 = langLog.substring(0, langLog.indexOf(' > ')) + ' > ... >'
+
+                        // Most recent translation (e.g. en > fr), highlighted in white
+                        const ll2 = langLog.substring(langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
+
+                        LANGLOG = `\x1b[92m${ll1}\x1b[0m${ll2}`
+                        break
+                    }
+
+                case Pref.ALL:
+                    // Languages used so far, up to most recent translation (highlight in green)
+                    const ll1 = i<2 ? '' : langLog.substring(0, langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
+                    
+                    // Most recent translation (e.g. en > fr), highlighted in white
+                    const ll2 = i<2 ? langLog : langLog.substring(langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
+                    
+                    LANGLOG = `\x1b[92m${ll1}\x1b[0m${ll2}`
+                    break
+            }
+
+            let PROGRESS = ''
+            switch (WHAT_TO_LOG.progress) {
+                case Pref.SOME:
+                    PROGRESS = `\x1b[35m \n${i}/${times}`
+                    break
+                case Pref.ALL:
+                    PROGRESS += i==times ? '\x1b[38;5;118m' : '\x1b[31m'
+                    PROGRESS += ` \n${i}/${times} (${(100*i/times).toFixed(1)}%)`
+                    if (totalAborts>0) PROGRESS += ` +${totalAborts} aborted attempt`
+                    if (totalAborts>1) PROGRESS += 's'
+                    break
+            }
+
+            PROGRESS += '\x1b[0m'
+
+            let TRANSLATION = '\n'
+            switch (WHAT_TO_LOG.translation) {
+                case Pref.SOME:
+                    // Reduce to one line (doesn't work for larger width charcaters, such as CJK block)
+                    TRANSLATION = (translation.replaceAll('\n', ' ')).substring(0, TERMINAL_COLS-1) + '…'
+
+                    // Formatting
+                    TRANSLATION = `\n \x1b[34m${TRANSLATION}\n`
+                    break
+                
+                case Pref.ALL:
+                    TRANSLATION = `\n \x1b[34m${translation}\n`
+                    break
+            }
+
+            // Date (yellow)
+            //        Languages (green and white)
+            //                              Progress (red)
+            //                                          Translation (blue)
+            console.log(`${DATE} ${LANGLOG} ${PROGRESS} ${TRANSLATION} \x1b[0m`)
+        }
+
+/* All done! */
+        // Tell the client how output language was decided
+        let langFoundBy = ''
+        switch (+langStat) {
+            case LangStatus.GIVEN:
+                langFoundBy = 'Source language provided by client (yay!)'
+                break
+                
+            case LangStatus.UNDET:
+                langFoundBy = `Source language not recognized, using ${outLang}`
+                                    break
+                
+            case LangStatus.DETEC:
+                langFoundBy = `Source language detected as ${outLang}`
+                break
+                
+            case LangStatus.NSUPP:
+                langFoundBy = `Source language detected as ${nspLang}, but was unsupported; using ${outLang}`
+                                    break
+        }
+        scream({
+            bamboozled: translation,
+            original: text,
+            langs: langLog.split(' > '),
+            langFoundBy
+        })
+        return
     })
 })
 
