@@ -17,10 +17,11 @@ ws.onopen = () => {
 const App: React.FC = () => {
   const [inputText, setInputText] = useState('')
   const [outputText, setOutputText] = useState('')
-  const [bothPanels, setBothPanels] = useState(false)
+  const [logText, setLogText] = useState('')
   const [isTranslating, setIsTranslating] = useState(false)
-  const inputBtn = document.querySelector('.inputButton') || document
+  const [bothPanels, setBothPanels] = useState(false)
 
+  const inputBtn = document.querySelector('.inputButton') || document
   const setProgress = (p) => {
     document.documentElement.style.setProperty("--loadProgress", p)
     inputBtn.textContent = p
@@ -63,6 +64,7 @@ const App: React.FC = () => {
     }
   }
 
+  // On each update from server
   useEffect(() => {
     ws.onmessage = (message) => {
       let data = JSON.parse(message.data)
@@ -70,6 +72,9 @@ const App: React.FC = () => {
       setOutputText(data.bamboozled)
       setProgress(100*data.langs.length/TIMES+'%')
 
+      setLogText(data.langs.join(' > '))
+
+      // If translation complete
       if (data.done) setIsTranslating(false)
     }
   }, [])
@@ -78,14 +83,16 @@ const App: React.FC = () => {
     <main>
       <div className="biPanelContainer">
         <BiPanel
-          text={inputText}
+          inputText={inputText}
+          outputText={outputText}
+          logText={logText}
+          
           onChange={setInputText}
           onScramble={handleScramble}
+          onCopy={handleCopy}
+
           isTranslating={isTranslating}
           bothPanels={bothPanels}
-
-          translatedText={outputText}
-          onCopy={handleCopy}
         />
       </div>
     </main>

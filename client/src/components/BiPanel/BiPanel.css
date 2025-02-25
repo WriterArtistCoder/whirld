@@ -5,6 +5,10 @@ html {
   --loadProgress: 0%;
 }
 
+* {
+  font-family: 'Oxygen Mono', monospace;
+}
+
 section {
   display: grid;
   grid-template-columns: 100% auto;
@@ -17,6 +21,8 @@ section.displayBothPanels {
   grid-template-columns: 50% auto;
 }
 
+/* Panels */
+
 .biPanel {
   display: block;
   height: 165px;
@@ -27,7 +33,6 @@ section.displayBothPanels {
   transition: all;
   transition-duration: 200ms;
 
-  font-family: 'Oxygen Mono', monospace;
   border: transparent solid 5px;
 }
 
@@ -66,6 +71,18 @@ section.displayBothPanels {
   display: block;
 }
 
+.logPanel {
+  grid-column: 1 / span 2;
+  grid-row: 3 / span 1;
+
+  color: #555;
+  font-style: italic;
+  font-size: 15px;
+  padding: 10px;
+}
+
+/* Buttons */
+
 button {
   padding: 20px;
 
@@ -75,7 +92,6 @@ button {
   border: none;
   outline: none;
 
-  font-family: 'Oxygen Mono', monospace;
   text-transform: uppercase;
 
   cursor: pointer;

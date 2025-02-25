@@ -2,23 +2,25 @@ import React from 'react';
 import './BiPanel.css';
 
 interface BiPanelProps {
-  text: string;
+  inputText: string;
+  outputText: string;
+  logText: string;
+
   onChange: (text: string) => void;
   onScramble: () => void;
+  onCopy: () => void;
+  
   isTranslating: boolean;
   bothPanels: boolean;
-
-  translatedText: string;
-  onCopy: () => void;
 }
 
-const BiPanel: React.FC<BiPanelProps> = ({ text, onChange, onScramble, isTranslating, bothPanels, translatedText, onCopy }) => {
+const BiPanel: React.FC<BiPanelProps> = ({ inputText,  outputText, logText, onChange, onScramble, isTranslating, bothPanels, onCopy }) => {
   return (
     <section className={(isTranslating ? "isTranslating" : "") + (bothPanels ? " displayBothPanels" : "")}>
       <textarea
         className="inputPanel biPanel"
         readOnly={isTranslating}
-        value={text}
+        value={inputText}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Type in a song, speech, or other text here!"
       />
@@ -34,8 +36,8 @@ const BiPanel: React.FC<BiPanelProps> = ({ text, onChange, onScramble, isTransla
       <textarea
         className="outputPanel biPanel"
         readOnly
-        value={translatedText}
-        // onWheel="document.querySelector('.inputPanel')?.scrollTop? = this.scrollTop || 0}"
+        value={outputText}
+     // onWheel="document.querySelector('.inputPanel')?.scrollTop? = this.scrollTop || 0}"
       />
       <button
         className="outputButton"
@@ -44,6 +46,10 @@ const BiPanel: React.FC<BiPanelProps> = ({ text, onChange, onScramble, isTransla
       >
         Copy
       </button>
+
+      <div className="logPanel">
+        {logText}
+      </div>
     </section>
   );
 };
