@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import BiPanel from './components/BiPanel/BiPanel'
 import './main.css'
 
+// TODO Panel heights should adjust to content size
+
 // Open WebSocket
 const ws = new WebSocket(
   `ws://localhost:3193/api/scramble`

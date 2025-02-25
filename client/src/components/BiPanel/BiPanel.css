@@ -21,6 +21,22 @@ section.funBegun {
   grid-template-columns: 50% auto;
 }
 
+/* Language selector */
+.inputLang {
+  position: relative;
+  top: 1em;
+  left: -2.5em;
+
+  font-size: 1.5em;
+  filter: saturate(0);
+  transition: all 200ms;
+}
+
+.inputLang:hover {
+  filter: saturate(1);
+  cursor: pointer;
+}
+
 /* Panels */
 
 .biPanel {
@@ -53,6 +69,11 @@ section.funBegun {
   color: #696969;
 }
 
+.inputPanel::selection {
+  background: #3c38b0;
+  color: #fff9e8;
+}
+
 .inputPanel:focus {
   color: #1339b4;
   border-color: #d3f4ff;
@@ -72,6 +93,11 @@ section.funBegun {
 .outputPanel:focus {
   color: #0f5d48;
   border-color: #dcffd3;
+}
+
+.outputPanel::selection {
+  background: #acff2f;
+  color: #4e5451;
 }
 
 .isTranslating > .outputPanel {
@@ -114,6 +140,10 @@ button {
   text-transform: uppercase;
 
   cursor: pointer;
+}
+
+button::selection {
+  background: transparent;
 }
 
 button:disabled, .isTranslating button {
