@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import InputPanel from './components/InputPanel/InputPanel';
 import { translateText } from './utils/translator'
+import BiPanel from './components/BiPanel/BiPanel';
+import './main.css'
 
 const App: React.FC = () => {
   const [inputText, setInputText] = useState('');
@@ -49,26 +50,19 @@ const App: React.FC = () => {
   };
 
   return (
-    <div>
-      <header>
-        <h1>🌎 Whirld 🌏</h1>
-        <p>Translate anything too many times!</p>
-      </header>
+    <main>
+      <div className="biPanelContainer">
+        <BiPanel
+          text={inputText}
+          onChange={setInputText}
+          onScramble={handleScramble}
+          isTranslating={isTranslating}
 
-      <main>
-        <div>
-          <InputPanel
-            text={inputText}
-            onChange={setInputText}
-            onScramble={handleScramble}
-            isTranslating={isTranslating}
-
-            translatedText={outputText}
-            onCopy={handleCopy}
-          />
-        </div>
-      </main>
-    </div>
+          translatedText={outputText}
+          onCopy={handleCopy}
+        />
+      </div>
+    </main>
   );
 };
 

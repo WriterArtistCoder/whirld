@@ -1,7 +1,7 @@
 import React from 'react';
-import './InputPanel.css';
+import './BiPanel.css';
 
-interface InputPanelProps {
+interface BiPanelProps {
   text: string;
   onChange: (text: string) => void;
   onScramble: () => void;
@@ -11,12 +11,11 @@ interface InputPanelProps {
   onCopy: () => void;
 }
 
-const InputPanel: React.FC<InputPanelProps> = ({ text, onChange, onScramble, isTranslating, translatedText, onCopy }) => {
+const BiPanel: React.FC<BiPanelProps> = ({ text, onChange, onScramble, isTranslating, translatedText, onCopy }) => {
   return (
     <section>
       <textarea
-        // className={styles.inputPanel}
-        className="inputPanel"
+        className="inputPanel biPanel"
         readOnly={isTranslating}
         value={text}
         onChange={(e) => onChange(e.target.value)}
@@ -33,7 +32,7 @@ const InputPanel: React.FC<InputPanelProps> = ({ text, onChange, onScramble, isT
 
       <textarea
         // className={styles.outputPanel}
-        className="outputPanel"
+        className="outputPanel biPanel"
         readOnly
         value={translatedText}
       />
@@ -47,4 +46,4 @@ const InputPanel: React.FC<InputPanelProps> = ({ text, onChange, onScramble, isT
   );
 };
 
-export default InputPanel;
+export default BiPanel;
