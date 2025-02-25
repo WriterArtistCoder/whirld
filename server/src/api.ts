@@ -76,7 +76,7 @@ wss.on('connection', function connection(ws : WebSocket) {
             const parsedMessage = JSON.parse(message.toString())
 
             lang = parsedMessage.lang
-            text =  parsedMessage.text
+            text = parsedMessage.text
             times = parsedMessage.times
         } catch (error : any) {
             // If JSON parsing error, blame the customer
@@ -214,7 +214,8 @@ wss.on('connection', function connection(ws : WebSocket) {
                                 original: text,
                                 langs: langLog.split(' > '),
                                 langFoundBy,
-                                error: `${i} of requested ${times} translations were completed`
+                                error: `${i} of requested ${times} translations were completed`,
+                                done: true
                             })
                             return
                         } catch {
@@ -226,6 +227,14 @@ wss.on('connection', function connection(ws : WebSocket) {
                         }
                     }
                 }
+
+                scream({
+                    bamboozled: translation,
+                    original: text,
+                    langs: langLog.split(' > '),
+                    // TODO add langFoundBy
+                    done: false
+                })
                 prevLang = nextLang
             }
 
@@ -321,7 +330,8 @@ wss.on('connection', function connection(ws : WebSocket) {
             bamboozled: translation,
             original: text,
             langs: langLog.split(' > '),
-            langFoundBy
+            langFoundBy,
+            done: true
         })
         return
     })

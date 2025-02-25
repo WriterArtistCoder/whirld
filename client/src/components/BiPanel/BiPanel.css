@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
 
 /* TODO Use em instead of px */
+html {
+  --loadProgress: 0%;
+}
 
 section {
   display: grid;
@@ -37,7 +40,7 @@ section.displayBothPanels {
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
 
-  background: rgb(211, 244, 255);
+  background: #d3f4ff;
   color: #1339b4;
   border-color: #31cfff;
 }
@@ -48,9 +51,15 @@ section.displayBothPanels {
   grid-column: 2 / span 2;
   grid-row: 1 / span 1;
 
-  background: rgb(220, 255, 211);
+  background: #dcffd3;
   color: #13b4b1;
   border-color: #1b951d;
+}
+
+.isTranslating > .outputPanel {
+  background: #333;
+  color: #fff;
+  border-color: #333;
 }
 
 .displayBothPanels > .outputPanel {
@@ -72,17 +81,26 @@ button {
   cursor: pointer;
 }
 
+button:disabled, .isTranslating button {
+  cursor: default;
+}
+
 .inputButton {
   margin-top: 10px;
   /* TODO Turn button into progress bar */
-  /* background: linear-gradient(90deg, blue 90%, cyan 90%); */
   grid-column: 1 / span 1;
   grid-row: 2 / span 1;
   background: #1339b4;
 }
 
 .inputButton:focus {
-  background: rgb(130, 130, 255);
+  background: #8282ff;
+}
+
+.isTranslating > .inputButton {
+  background: linear-gradient(90deg, #1339b4 var(--loadProgress), #9db4ff var(--loadProgress));
+  grid-column: 1 / span 3;
+  padding: 5px;
 }
 
 .outputButton {
@@ -95,9 +113,13 @@ button {
 }
 
 .outputButton:focus {
-  background: rgb(31, 189, 36);
+  background: #1fbd24;
 }
 
 .displayBothPanels > .outputButton {
   display: block;
+}
+
+.isTranslating.displayBothPanels > .outputButton {
+  display: none;
 }
