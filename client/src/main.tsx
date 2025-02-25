@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
-import { translateText } from './utils/translator'
+import React, { useEffect, useState } from 'react'
 import BiPanel from './components/BiPanel/BiPanel';
 import './main.css'
+
+// Open WebSocket
+const ws = new WebSocket(
+  `ws://localhost:3193/api/scramble`
+)
+
+ws.onopen = () => {
+  console.log("WebSocket open to "+ws.url)
+}
 
 const App: React.FC = () => {
   const [inputText, setInputText] = useState('');
@@ -15,15 +23,16 @@ const App: React.FC = () => {
     let currentText = inputText;
     document.querySelector('section')?.classList.add('displayBothPanels')
 
+    
     try {
       try {
-        const translation = await translateText(
-          'en',
-          currentText,
-          5
+        ws.send(
+          JSON.stringify({
+            lang: 'en', // TODO make user-editable
+            text: currentText,
+            times: 5,
+          })
         )
-
-        setOutputText(translation)
       } catch {
         console.log('Translation error =(')
       }
@@ -48,6 +57,12 @@ const App: React.FC = () => {
       document.body.removeChild(textArea);
     }
   };
+
+  useEffect(() => {
+    ws.onmessage = (message) => {
+      console.log(message.data)
+    }
+  }, [])
 
   return (
     <main>
