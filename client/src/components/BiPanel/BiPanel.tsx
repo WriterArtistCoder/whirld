@@ -9,15 +9,15 @@ interface BiPanelProps {
   onChange: (text: string) => void;
   onScramble: () => void;
   onCopy: () => void;
-  
+
   copied: boolean;
   isTranslating: boolean;
-  bothPanels: boolean;
+  funBegun: boolean;
 }
 
-const BiPanel: React.FC<BiPanelProps> = ({ inputText,  outputText, logText, onChange, onScramble, isTranslating, bothPanels, onCopy, copied }) => {
+const BiPanel: React.FC<BiPanelProps> = ({ inputText,  outputText, logText, onChange, onScramble, isTranslating, funBegun, onCopy, copied }) => {
   return (
-    <section className={(isTranslating ? "isTranslating" : "") + (bothPanels ? " displayBothPanels" : "")}>
+    <section className={(isTranslating ? "isTranslating" : "") + (funBegun ? " funBegun" : "")}>
       <textarea
         className="inputPanel biPanel"
         readOnly={isTranslating}
@@ -31,7 +31,7 @@ const BiPanel: React.FC<BiPanelProps> = ({ inputText,  outputText, logText, onCh
         onClick={onScramble}
         disabled={isTranslating}
       >
-        {isTranslating ? 'Translating...' : 'Scramble'}
+        {isTranslating ? 'Translating...' : funBegun ? 'Scramble more!' : 'Scramble'}
       </button>
 
       <textarea

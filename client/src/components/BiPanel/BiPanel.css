@@ -17,7 +17,7 @@ section {
   margin: auto;
 }
 
-section.displayBothPanels {
+section.funBegun {
   grid-template-columns: 50% auto;
 }
 
@@ -27,16 +27,16 @@ section.displayBothPanels {
   display: block;
   height: 165px;
   margin: 0;
-  padding: 10px;
+  padding: 20px;
   resize: none;
 
+  font-size: 1em;
   transition: all 200ms;
 
-  border: transparent solid 5px;
+  border: transparent solid 6px;
 }
 
 .biPanel:focus {
-  border-color: #fff;
   outline: none !important;
 }
 
@@ -45,8 +45,17 @@ section.displayBothPanels {
   grid-row: 1 / span 1;
 
   background: #d3f4ff;
-  color: #1339b4;
+  color: #1f7f9c;
   border-color: #31cfff;
+}
+
+.inputPanel::placeholder {
+  color: #696969;
+}
+
+.inputPanel:focus {
+  color: #1339b4;
+  border-color: #d3f4ff;
 }
 
 .outputPanel {
@@ -56,8 +65,13 @@ section.displayBothPanels {
   grid-row: 1 / span 1;
 
   background: #dcffd3;
-  color: #13b4b1;
-  border-color: #1b951d;
+  color: #0d8380;
+  border-color: #11a6a3;
+}
+
+.outputPanel:focus {
+  color: #0f5d48;
+  border-color: #dcffd3;
 }
 
 .isTranslating > .outputPanel {
@@ -66,7 +80,7 @@ section.displayBothPanels {
   border-color: #333;
 }
 
-.displayBothPanels > .outputPanel {
+.funBegun > .outputPanel {
   display: block;
 }
 
@@ -88,6 +102,7 @@ section.displayBothPanels {
 /* Buttons */
 
 button {
+  font-size: 1.2em;
   padding: 20px;
 
   transition: all;
@@ -136,10 +151,10 @@ button:disabled, .isTranslating button {
   background: #1fbd24;
 }
 
-.displayBothPanels > .outputButton {
+.funBegun > .outputButton {
   display: block;
 }
 
-.isTranslating.displayBothPanels > .outputButton {
+.isTranslating.funBegun > .outputButton {
   display: none;
 }

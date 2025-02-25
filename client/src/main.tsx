@@ -15,25 +15,44 @@ ws.onopen = () => {
 }
 
 const App: React.FC = () => {
-  const [inputText, setInputText] = useState('')
-  const [outputText, setOutputText] = useState('')
-  const [logText, setLogText] = useState('')
-  const [isTranslating, setIsTranslating] = useState(false)
-  const [bothPanels, setBothPanels] = useState(false)
-  const [copied, setCopied] = useState(false)
+  // Properties shared with BiPanel
+  const [inputText, setInputText] = useState('') // Set input panel content
+  const [outputText, setOutputText] = useState('') // Set output panel content
+  const [logText, setLogText] = useState('') // Set log panel content
+  const [isTranslating, setIsTranslating] = useState(false) // Currently translatng?
+  const [funBegun, setFunBegun] = useState(false) // True once first translation begins
+  const [copied, setCopied] = useState(false) // Trigger output copied animation
+
+  // Others
+  const [useInput, setUseInput] = useState(true) // Use input panel for input?
 
   const inputBtn = document.querySelector('.inputButton') || document
   const setProgress = (p) => {
     document.documentElement.style.setProperty("--loadProgress", p)
     inputBtn.textContent = p
   }
+  
+  const handleInputChange = async (d) => {
+    // If the user clicks 'Scramble more', use the output as the input
+    // But if they edit the input first, just use the input as input
+    if (funBegun) {
+      setUseInput(true)
+      inputBtn.textContent = 'Scramble'
+    }
+    setInputText(d)
+  }
 
   const handleScramble = async () => {
     if (!inputText.trim() || isTranslating) return
-    setIsTranslating(true)
 
+    // If the user clicks 'Scramble more', use the output as the input
+    // But if they edit the input first, just use the input as input
+    if (!useInput) setInputText(outputText)
+    
     let currentText = inputText
-    setBothPanels(true)
+    setIsTranslating(true)
+    setFunBegun(true)
+    setUseInput(false)
 
     try {
       try {
@@ -91,13 +110,13 @@ const App: React.FC = () => {
           outputText={outputText}
           logText={logText}
           
-          onChange={setInputText}
+          onChange={handleInputChange}
           onScramble={handleScramble}
           onCopy={handleCopy}
 
           copied={copied}
           isTranslating={isTranslating}
-          bothPanels={bothPanels}
+          funBegun={funBegun}
         />
       </div>
     </main>
