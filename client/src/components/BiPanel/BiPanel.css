@@ -130,6 +130,8 @@ section.funBegun {
 button {
   font-size: 1.2em;
   padding: 20px;
+  position: relative;
+  bottom: 0;
 
   transition: all;
   transition-duration: 100ms;
@@ -158,7 +160,7 @@ button:disabled, .isTranslating button {
   background: #1339b4;
 }
 
-.inputButton:focus {
+.inputButton:hover {
   background: #8282ff;
 }
 
@@ -177,8 +179,12 @@ button:disabled, .isTranslating button {
   background: #1b951d;
 }
 
-.outputButton:focus {
+.outputButton:hover {
   background: #1fbd24;
+}
+
+.outputButton:active {
+  bottom: 5px;
 }
 
 .funBegun > .outputButton {

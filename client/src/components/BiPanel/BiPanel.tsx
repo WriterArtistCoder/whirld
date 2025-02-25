@@ -18,9 +18,9 @@ interface BiPanelProps {
 const BiPanel: React.FC<BiPanelProps> = ({ inputText,  outputText, logText, onChange, onScramble, isTranslating, funBegun, onCopy, copied }) => {
   return (
     <section className={(isTranslating ? "isTranslating" : "") + (funBegun ? " funBegun" : "")}>
-      <div className="inputLang">
+      {/* <div className="inputLang">
         🌏
-      </div>
+      </div> TODO Finish lang selector */}
 
       <textarea
         className="inputPanel biPanel"
