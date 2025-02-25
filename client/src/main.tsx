@@ -20,6 +20,7 @@ const App: React.FC = () => {
   const [logText, setLogText] = useState('')
   const [isTranslating, setIsTranslating] = useState(false)
   const [bothPanels, setBothPanels] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   const inputBtn = document.querySelector('.inputButton') || document
   const setProgress = (p) => {
@@ -61,6 +62,9 @@ const App: React.FC = () => {
       textArea.select()
       document.execCommand('copy')
       document.body.removeChild(textArea)
+    } finally {
+      setCopied(true)
+      setTimeout(()=>{setCopied(false)}, 200)
     }
   }
 
@@ -91,6 +95,7 @@ const App: React.FC = () => {
           onScramble={handleScramble}
           onCopy={handleCopy}
 
+          copied={copied}
           isTranslating={isTranslating}
           bothPanels={bothPanels}
         />

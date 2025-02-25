@@ -12,7 +12,7 @@ html {
 section {
   display: grid;
   grid-template-columns: 100% auto;
-  transition: 250ms;
+  transition: all 250ms;
   width: 100%;
   margin: auto;
 }
@@ -30,8 +30,7 @@ section.displayBothPanels {
   padding: 10px;
   resize: none;
 
-  transition: all;
-  transition-duration: 200ms;
+  transition: all 200ms;
 
   border: transparent solid 5px;
 }
@@ -69,6 +68,11 @@ section.displayBothPanels {
 
 .displayBothPanels > .outputPanel {
   display: block;
+}
+
+.outputPanel.outputCopied {
+  transform: scale(80%);
+  filter: brightness(120%) blur(1px);
 }
 
 .logPanel {

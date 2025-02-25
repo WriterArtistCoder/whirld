@@ -10,11 +10,12 @@ interface BiPanelProps {
   onScramble: () => void;
   onCopy: () => void;
   
+  copied: boolean;
   isTranslating: boolean;
   bothPanels: boolean;
 }
 
-const BiPanel: React.FC<BiPanelProps> = ({ inputText,  outputText, logText, onChange, onScramble, isTranslating, bothPanels, onCopy }) => {
+const BiPanel: React.FC<BiPanelProps> = ({ inputText,  outputText, logText, onChange, onScramble, isTranslating, bothPanels, onCopy, copied }) => {
   return (
     <section className={(isTranslating ? "isTranslating" : "") + (bothPanels ? " displayBothPanels" : "")}>
       <textarea
@@ -34,7 +35,7 @@ const BiPanel: React.FC<BiPanelProps> = ({ inputText,  outputText, logText, onCh
       </button>
 
       <textarea
-        className="outputPanel biPanel"
+        className={copied ? "outputPanel outputCopied biPanel" : "outputPanel biPanel"}
         readOnly
         value={outputText}
      // onWheel="document.querySelector('.inputPanel')?.scrollTop? = this.scrollTop || 0}"
