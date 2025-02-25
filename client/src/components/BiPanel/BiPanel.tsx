@@ -11,11 +11,12 @@ interface BiPanelProps {
   onCopy: () => void;
 
   copied: boolean;
+  wasError: boolean;
   isTranslating: boolean;
   funBegun: boolean;
 }
 
-const BiPanel: React.FC<BiPanelProps> = ({ inputText,  outputText, logText, onChange, onScramble, isTranslating, funBegun, onCopy, copied }) => {
+const BiPanel: React.FC<BiPanelProps> = ({ inputText, outputText, logText, onChange, onScramble, isTranslating, funBegun, onCopy, copied, wasError }) => {
   return (
     <section className={(isTranslating ? "isTranslating" : "") + (funBegun ? " funBegun" : "")}>
       {/* <div className="inputLang">
@@ -39,14 +40,14 @@ const BiPanel: React.FC<BiPanelProps> = ({ inputText,  outputText, logText, onCh
       </button>
 
       <textarea
-        className={copied ? "outputPanel outputCopied biPanel" : "outputPanel biPanel"}
+        className={("outputPanel biPanel") + (copied ? " outputCopied" : "") + (wasError ? " outputError" : "")}
         readOnly
         value={outputText}
      // onWheel="document.querySelector('.inputPanel')?.scrollTop? = this.scrollTop || 0}"
       />
       <button
         className="outputButton"
-        disabled={isTranslating}
+        disabled={isTranslating || wasError}
         onClick={onCopy}
       >
         Copy

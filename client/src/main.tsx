@@ -24,6 +24,7 @@ const App: React.FC = () => {
   const [isTranslating, setIsTranslating] = useState(false) // Currently translatng?
   const [funBegun, setFunBegun] = useState(false) // True once first translation begins
   const [copied, setCopied] = useState(false) // Trigger output copied animation
+  const [wasError, setWasError] = useState(false) // Error message
 
   // Others
   const [useInput, setUseInput] = useState(true) // Use input panel for input?
@@ -55,19 +56,23 @@ const App: React.FC = () => {
     setIsTranslating(true)
     setFunBegun(true)
     setUseInput(false)
+    setWasError(false)
 
     try {
-      try {
-        scream({
-          lang: 'en', // TODO make user-editable
-          text: currentText,
-          times: TIMES,
-        })
-      } catch {
-        console.log('Translation error =(')
-      }
+      // throw new Error()
+      scream({
+        lang: 'en', // TODO make user-editable
+        text: currentText,
+        times: TIMES,
+      })
     } catch (error) {
+      // TODO Is displaying this a security risk?
       console.error('Translation error:', error)
+
+      setIsTranslating(false)
+      setWasError(true)
+      setOutputText('Translation error: ' + error)
+      return
     }
   }
 
@@ -100,7 +105,11 @@ const App: React.FC = () => {
       setLogText(data.langs.join(' > '))
 
       // If translation complete
-      if (data.done) setIsTranslating(false)
+      if (data.done) {
+        setIsTranslating(false)
+        setOutputText(data.bamboozled)
+      } else
+        setOutputText(`[${data.langs[data.langs.length-1]} ${data.langs.length-1}/${TIMES}] ${data.bamboozled}`)
     }
   }, [])
 
@@ -119,6 +128,7 @@ const App: React.FC = () => {
           copied={copied}
           isTranslating={isTranslating}
           funBegun={funBegun}
+          wasError={wasError}
         />
       </div>
     </main>
