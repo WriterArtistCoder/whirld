@@ -7,6 +7,8 @@ const ws = new WebSocket(
   `ws://localhost:3193/api/scramble`
 )
 
+const scream = (data : Object) => ws.send(JSON.stringify(data))
+
 ws.onopen = () => {
   console.log("WebSocket open to "+ws.url)
 }
@@ -23,16 +25,13 @@ const App: React.FC = () => {
     let currentText = inputText;
     document.querySelector('section')?.classList.add('displayBothPanels')
 
-    
     try {
       try {
-        ws.send(
-          JSON.stringify({
-            lang: 'en', // TODO make user-editable
-            text: currentText,
-            times: 5,
-          })
-        )
+        scream({
+          lang: 'en', // TODO make user-editable
+          text: currentText,
+          times: 5,
+        })
       } catch {
         console.log('Translation error =(')
       }
@@ -60,7 +59,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     ws.onmessage = (message) => {
-      console.log(message.data)
+      setOutputText(JSON.parse(message.data).bamboozled)
     }
   }, [])
 
