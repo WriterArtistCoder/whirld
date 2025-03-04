@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import BiPanel from './components/BiPanel/BiPanel'
 import './main.css'
 
-// TODO Panel heights should adjust to content size
-
 // Open WebSocket
 const ws = new WebSocket(
   `ws://localhost:3193/api/scramble`
@@ -11,6 +9,10 @@ const ws = new WebSocket(
 
 const scream = (data : Object) => ws.send(JSON.stringify(data))
 const TIMES = 10 // TODO make user-customizable
+
+const savedScrambles: Object[] = [
+
+]
 
 ws.onopen = () => {
   console.log("WebSocket open to "+ws.url)
@@ -46,6 +48,7 @@ const App: React.FC = () => {
   }
 
   const handleScramble = async () => {
+    console.log(savedScrambles)
     if (!inputText.trim() || isTranslating) return
 
     // If the user clicks 'Scramble more', use the output as the input
@@ -98,7 +101,8 @@ const App: React.FC = () => {
   useEffect(() => {
     ws.onmessage = (message) => {
       let data = JSON.parse(message.data)
-      console.log(new Date().toISOString(), message)
+      let date = new Date()
+      console.log(date, message)
       setOutputText(data.bamboozled)
       setProgress(100*data.langs.length/TIMES+'%')
 
@@ -107,6 +111,7 @@ const App: React.FC = () => {
       // If translation complete
       if (data.done) {
         setIsTranslating(false)
+        savedScrambles.push(data)
         setOutputText(data.bamboozled)
       } else
         setOutputText(`[${data.langs[data.langs.length-1]} ${data.langs.length-1}/${TIMES}] ${data.bamboozled}`)

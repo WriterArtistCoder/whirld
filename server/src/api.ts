@@ -1,6 +1,4 @@
 // TODO Optimize, test performance without some of the bells and whistles
-// TODO Time out for long requests
-// TODO Handle simultaneous requests (assign ID?)
 // TODO Make API more orthodox in its error handling, are there websocket status codes?
 
 import { Hono } from "hono"
@@ -8,6 +6,7 @@ import { cors } from "hono/cors"
 import { AxiosError } from "axios"
 import http from "http"
 import { WebSocket, WebSocketServer } from "ws"
+import { v4 as uuidv4 } from 'uuid'
 import { GoogleTranslate } from "./GoogleCloud/GoogleTranslate"
 
 /* Constants and configuration */
@@ -56,17 +55,40 @@ console.log = function () {
 console.error = console.log
 
 /* WebSocket */
+
 const wss = new WebSocketServer({ noServer: true })
 
 // Handle WebSocket connections
 wss.on('connection', function connection(ws : WebSocket) {
+    const id = uuidv4()
     const scream = (data : Object) => ws.send(JSON.stringify(data))
 
-    console.log(`\x1b[1m  \n\n\n\x1b[93m${new Date().toISOString()}\x1b[0;1m New WebSocket connection \x1b[0m`)
+    console.log(`\n\x1b[93m${new Date().toISOString()}\x1b[0m New WebSocket connection ${id}`)
+
+    ws.on('close', async function closed(message : string) {
+        console.log(`\n\x1b[93m${new Date().toISOString()}\x1b[0m WebSocket connection ended ${id}`)
+    })
 
     // Handle incoming messages: scramble text
-    ws.on('message', async function incoming(message : string) {
-        console.log(`\x1b[1m  \n\n\n\x1b[93m${new Date().toISOString()}\x1b[0;1m POST /api/scramble \x1b[0m`)
+    // TODO make the timeout work
+    ws.on('message', async function incoming<T>(message : string): Promise<void> {
+        const scramblePromise = new Promise<void>((_, resolve) => {
+            scramble(message)
+            resolve()
+        })
+
+        const timeoutPromise = new Promise<never>((_, reject) => {
+            setTimeout(() => {
+                reject(new Error(`Operation timed out`))
+                ws.close()
+            }, 100000000000000000000)
+        })
+
+        return Promise.race([scramblePromise, timeoutPromise])
+    })
+        
+    async function scramble(message : string) {
+        console.log(`\x1b[1m  \n\n\n\x1b[93m${new Date().toISOString()}\x1b[0;1m POST /api/scramble ${id} \x1b[0m`)
     
         let lang, text, times
 
@@ -134,22 +156,24 @@ wss.on('connection', function connection(ws : WebSocket) {
 
         for (var i = 0; i < times+1; i++) {
             if (i>0) {
-                // Pick random lang, or if is last translation, translate into output lang
-                let nextLang = i==times ? outLang : LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
-                while (((i<times) && (nextLang == prevLang)) || // Don't pick same language, this is not accepted     (... > af > AF > ...)
-                        ((i==times-1) && nextLang == outLang))  // Don't pick output lang for penultimate translation (... > fr > EN > en)
-                    console.log('Uh oh', nextLang = LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))])
-                
+                let nextLang
+
+                if (i==times) // Pick output lang for final translation
+                    nextLang = outLang
+                else {
+                    do  // Pick random lang
+                        nextLang = LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
+                    while (((i<times) && (nextLang == prevLang)) || // No "circular translations" e.g. af > af
+                           (i==(times-1) && nextLang == outLang)) // Don't pick output lang for 2nd-to-last translation, this will force a circular
+                }
                 langLog += ' > ' + nextLang
 
                 try {
                     // Perform a translation
                     translation = await gt.translateText(translation, nextLang, prevLang)
 
-                    // If lang not yet detected
-                    if (langStat == LangStatus.UNDET) {
-                        // TODO handle Google Translate not detecting a language at all
-                        // Extract detected language
+                    // If lang not yet detected, extract detected language
+                    if (langStat == LangStatus.UNDET && i==0) {
                         langStat = LangStatus.DETEC
                         outLang = translation.substring(0, translation.indexOf(' '))
                         translation = translation.substring(translation.indexOf(' ')+1)
@@ -232,7 +256,6 @@ wss.on('connection', function connection(ws : WebSocket) {
                     bamboozled: translation,
                     original: text,
                     langs: langLog.split(' > '),
-                    // TODO add langFoundBy
                     done: false
                 })
                 prevLang = nextLang
@@ -241,69 +264,7 @@ wss.on('connection', function connection(ws : WebSocket) {
             abortsInARow = 0
 
 /* Logging */
-            let DATE = `\x1b[93m${new Date().toISOString()}` // TODO add logging of elapsed time
-
-            let LANGLOG = ''
-
-            switch (WHAT_TO_LOG.languages) {
-                case Pref.SOME:
-                    if (langLog.length > TERMINAL_COLS-DATE_COLS) {
-                        // Original language (highlight in green)
-                        const ll1 = langLog.substring(0, langLog.indexOf(' > ')) + ' > ... >'
-
-                        // Most recent translation (e.g. en > fr), highlighted in white
-                        const ll2 = langLog.substring(langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
-
-                        LANGLOG = `\x1b[92m${ll1}\x1b[0m${ll2}`
-                        break
-                    }
-
-                case Pref.ALL:
-                    // Languages used so far, up to most recent translation (highlight in green)
-                    const ll1 = i<2 ? '' : langLog.substring(0, langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
-                    
-                    // Most recent translation (e.g. en > fr), highlighted in white
-                    const ll2 = i<2 ? langLog : langLog.substring(langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
-                    
-                    LANGLOG = `\x1b[92m${ll1}\x1b[0m${ll2}`
-                    break
-            }
-
-            let PROGRESS = ''
-            switch (WHAT_TO_LOG.progress) {
-                case Pref.SOME:
-                    PROGRESS = `\x1b[35m \n${i}/${times}`
-                    break
-                case Pref.ALL:
-                    PROGRESS += i==times ? '\x1b[38;5;118m' : '\x1b[31m'
-                    PROGRESS += ` \n${i}/${times} (${(100*i/times).toFixed(1)}%)`
-                    if (totalAborts>0) PROGRESS += ` +${totalAborts} aborted attempt`
-                    if (totalAborts>1) PROGRESS += 's'
-                    break
-            }
-
-            PROGRESS += '\x1b[0m'
-
-            let TRANSLATION = '\n'
-            switch (WHAT_TO_LOG.translation) {
-                case Pref.SOME:
-                    // Reduce to one line (doesn't work for larger width charcaters, such as CJK block)
-                    TRANSLATION = (translation.replaceAll('\n', ' ')).substring(0, TERMINAL_COLS-1) + '…'
-
-                    // Formatting
-                    TRANSLATION = `\n \x1b[34m${TRANSLATION}\n`
-                    break
-                
-                case Pref.ALL:
-                    TRANSLATION = `\n \x1b[34m${translation}\n`
-                    break
-            }
-
-            // Date (yellow)
-            //        Languages (green and white)
-            //                              Progress (red)
-            //                                          Translation (blue)
-            console.log(`${DATE} ${LANGLOG} ${PROGRESS} ${TRANSLATION} \x1b[0m`)
+            logTranslation(id, new Date(), langLog, i, times, totalAborts, translation)
         }
 
 /* All done! */
@@ -316,7 +277,7 @@ wss.on('connection', function connection(ws : WebSocket) {
                 
             case LangStatus.UNDET:
                 langFoundBy = `Source language not recognized, using ${outLang}`
-                                    break
+                break
                 
             case LangStatus.DETEC:
                 langFoundBy = `Source language detected as ${outLang}`
@@ -324,7 +285,7 @@ wss.on('connection', function connection(ws : WebSocket) {
                 
             case LangStatus.NSUPP:
                 langFoundBy = `Source language detected as ${nspLang}, but was unsupported; using ${outLang}`
-                                    break
+                break
         }
         scream({
             bamboozled: translation,
@@ -334,8 +295,74 @@ wss.on('connection', function connection(ws : WebSocket) {
             done: true
         })
         return
-    })
+    }
 })
+
+const logTranslation = function(id : string, date : Date, langLog : string, i : number, times : number, totalAborts : number, translation : string) {
+    let DATE = `\x1b[93m${date.toISOString()}` // TODO add logging of elapsed time
+
+    let LANGLOG = ''
+
+    switch (WHAT_TO_LOG.languages) {
+        case Pref.SOME:
+            if (langLog.length > TERMINAL_COLS-DATE_COLS) {
+                // Original language (highlight in green)
+                const ll1 = langLog.substring(0, langLog.indexOf(' > ')) + ' > ... >'
+
+                // Most recent translation (e.g. en > fr), highlighted in white
+                const ll2 = langLog.substring(langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
+
+                LANGLOG = `\x1b[92m${ll1}\x1b[0m${ll2}`
+                break
+            }
+
+        case Pref.ALL:
+            // Languages used so far, up to most recent translation (highlight in green)
+            const ll1 = i<2 ? '' : langLog.substring(0, langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
+            
+            // Most recent translation (e.g. en > fr), highlighted in white
+            const ll2 = i<2 ? langLog : langLog.substring(langLog.lastIndexOf(' > ', langLog.lastIndexOf(' > ')-1)+2)
+            
+            LANGLOG = `\x1b[92m${ll1}\x1b[0m${ll2}`
+            break
+    }
+
+    let PROGRESS = '\n' + id
+    switch (WHAT_TO_LOG.progress) {
+        case Pref.SOME:
+            PROGRESS += `\x1b[35m ${i}/${times}`
+            break
+        case Pref.ALL:
+            PROGRESS += i==times ? ' \x1b[38;5;118m' : ' \x1b[31m'
+            PROGRESS += `${i}/${times} (${(100*i/times).toFixed(1)}%)`
+            if (totalAborts>0) PROGRESS += ` +${totalAborts} aborted attempt`
+            if (totalAborts>1) PROGRESS += 's'
+            break
+    }
+
+    PROGRESS += `\x1b[0m`
+
+    let TRANSLATION = '\n'
+    switch (WHAT_TO_LOG.translation) {
+        case Pref.SOME:
+            // Reduce to one line (doesn't work for larger width charcaters, such as CJK block)
+            TRANSLATION = (translation.replaceAll('\n', ' ')).substring(0, TERMINAL_COLS-1) + '…'
+
+            // Formatting
+            TRANSLATION = `\n \x1b[34m${TRANSLATION}\n`
+            break
+        
+        case Pref.ALL:
+            TRANSLATION = `\n \x1b[34m${translation}\n`
+            break
+    }
+
+    // Date (yellow)
+    //        Languages (green and white)
+    //                              Progress (red)
+    //                                          Translation (blue)
+    console.log(`${DATE} ${LANGLOG} ${PROGRESS} ${TRANSLATION} \x1b[0m`)
+}
 
 server.on('upgrade', (request, socket, head) => {
     const pathname = new URL(request.url || '', `http://${request.headers.host}`).pathname
