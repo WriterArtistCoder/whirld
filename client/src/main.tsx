@@ -61,22 +61,21 @@ const App: React.FC = () => {
     setUseInput(false)
     setWasError(false)
 
-    try {
-      // throw new Error()
-      scream({
-        lang: 'en', // TODO make user-editable
-        text: currentText,
-        times: TIMES,
-      })
-    } catch (error) {
-      // TODO Is displaying this a security risk?
-      console.error('Translation error:', error)
+    // try {
+    scream({
+      lang: 'en', // TODO make user-editable
+      text: currentText,
+      times: TIMES,
+    })
+    // } catch (error) {
+    //   // TODO Is displaying this a security risk?
+    //   console.error('Translation error:', error)
 
-      setIsTranslating(false)
-      setWasError(true)
-      setOutputText('Translation error: ' + error)
-      return
-    }
+    //   setIsTranslating(false)
+    //   setWasError(true)
+    //   setOutputText('Translation error: ' + error)
+    //   return
+    // }
   }
 
   const handleCopy = async () => {
@@ -103,20 +102,24 @@ const App: React.FC = () => {
       let data = JSON.parse(message.data)
       let date = new Date()
       console.log(date, message)
-      setOutputText(data.bamboozled)
-      setProgress(100*data.langs.length/TIMES+'%')
-
-      setLogText(data.langs.join(' > '))
 
       // If translation complete
-      if (data.done) {
-        setIsTranslating(false)
-        savedScrambles.push(data)
-        setOutputText(data.bamboozled)
-      } else
-        setOutputText(`[${data.langs[data.langs.length-1]} ${data.langs.length-1}/${TIMES}] ${data.bamboozled}`)
+      if (data.error) {
+        console.log('Translation error:', data.error)
+        setWasError(true)
+        setOutputText((data.bamboozled || outputText) + '\nTranslation error: ' + data.error)
+      } else {
+        if (data.done) {
+          setIsTranslating(false)
+          savedScrambles.push(data)
+          setOutputText(data.bamboozled)
+        } else
+          setOutputText(`[${data.langs[data.langs.length-1]} ${data.langs.length-1}/${TIMES}] ${data.bamboozled}`)
+        
+        setProgress(100*data.langs.length/TIMES+'%')
+      }
     }
-  }, [])
+  }, [outputText])
 
   return (
     <main>

@@ -15,7 +15,7 @@ const FALLBACK_LANG = 'en' // Fallback language if source language cannot be use
 const LANGUAGES = [ // TODO Update automatically https://cloud.google.com/translate/docs/basic/discovering-supported-languages
     'af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs', 'bg', 'ca', 'ceb', 'zh', 'zh-TW', 'co', 'hr', 'cs', 'da', 'nl', 'en', 'eo', 'et', 'fi', 'fr', 'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'he', 'hi', 'hmn', 'hu', 'is', 'ig', 'id', 'ga', 'it', 'ja', 'jv', 'kn', 'kk', 'km', 'rw', 'ko', 'ku', 'ky', 'lo', 'lv', 'lt', 'lb', 'mk', 'mg', 'ms', 'ml', 'mt', 'mi', 'mr', 'mn', 'my', 'ne', 'no', 'ny', 'or', 'ps', 'fa', 'pl', 'pt', 'pa', 'ro', 'ru', 'sm', 'gd', 'sr', 'st', 'sn', 'sd', 'si', 'sk', 'sl', 'so', 'es', 'su', 'sw', 'sv', 'tl', 'tg', 'ta', 'tt', 'te', 'th', 'tr', 'tk', 'uk', 'ur', 'ug', 'uz', 'vi', 'cy', 'xh', 'yi', 'yo', 'zu']
 const OH_CRAP_LIMIT = 5 // Fold after 5 consecutive unsuccessful translations
-const TIMEOUT_AFTER = 1000 * 120 // Time out after 2 minutes TODO add this functionality
+const TIMEOUT_AFTER = 2 * 60 * 1000 // Time out after 2 minutes
 
 const app = new Hono()
 const server = http.createServer(app.fetch as any)
@@ -70,24 +70,11 @@ wss.on('connection', function connection(ws : WebSocket) {
     })
 
     // Handle incoming messages: scramble text
-    // TODO make the timeout work
     ws.on('message', async function incoming<T>(message : string): Promise<void> {
-        const scramblePromise = new Promise<void>((_, resolve) => {
-            scramble(message)
-            resolve()
-        })
-
-        const timeoutPromise = new Promise<never>((_, reject) => {
-            setTimeout(() => {
-                reject(new Error(`Operation timed out`))
-                ws.close()
-            }, 100000000000000000000)
-        })
-
-        return Promise.race([scramblePromise, timeoutPromise])
+        scramble(message, Date.now() + TIMEOUT_AFTER)
     })
-        
-    async function scramble(message : string) {
+    
+    async function scramble(message : string, stopBy : number) {
         console.log(`\x1b[1m  \n\n\n\x1b[93m${new Date().toISOString()}\x1b[0;1m POST /api/scramble ${id} \x1b[0m`)
     
         let lang, text, times
@@ -105,7 +92,8 @@ wss.on('connection', function connection(ws : WebSocket) {
             if (error instanceof SyntaxError && error.message.startsWith('JSON Parse')) {
                 console.error(error)
                 scream({
-                    error: "Invalid JSON"
+                    error: "Invalid JSON",
+                    done: true
                 })
                 return
             }
@@ -132,7 +120,8 @@ wss.on('connection', function connection(ws : WebSocket) {
         // HTTP 400 if text invalid
         if (!(typeof text === 'string')) {
             scream({
-                error: '"text" property should be a string'
+                error: '"text" property should be a string',
+                done: true
             })
             return
         }
@@ -140,12 +129,14 @@ wss.on('connection', function connection(ws : WebSocket) {
         // HTTP 400 if times invalid
         if (!Number.isInteger(times) || times<2) {
             scream({
-                error: '"times" property should be a number, 2 or more'
+                error: '"times" property should be a number, 2 or more',
+                done: true
             })
             return
         } else if (times>500) {
             scream({
-                error: '"times" property should be a number, 500 or less'
+                error: '"times" property should be a number, 500 or less',
+                done: true
             })
             return
         }
@@ -155,6 +146,16 @@ wss.on('connection', function connection(ws : WebSocket) {
         let translation = text
 
         for (var i = 0; i < times+1; i++) {
+            if (Date.now() > stopBy) {
+                // TODO Return what we have for partial credit, like is done after too many consecutive errors?
+                console.log(`\x1b[30;103m${new Date().toISOString()}\x1b[0m \x1b[30;101m Timed out after ${TIMEOUT_AFTER}ms \x1b[0;91m`)
+                scream({
+                    error: `Request timed out after ${TIMEOUT_AFTER}ms`,
+                    done: true
+                })
+                return
+            }
+
             if (i>0) {
                 let nextLang
 
@@ -245,7 +246,8 @@ wss.on('connection', function connection(ws : WebSocket) {
                         } catch {
                             // If even that didn't work, lose all hope
                             scream({
-                                error: "Sorry"
+                                error: "Sorry",
+                                done: true
                             })
                             return
                         }
