@@ -116,7 +116,7 @@ const App: React.FC = () => {
         } else
           setOutputText(`[${data.langs[data.langs.length-1]} ${data.langs.length-1}/${TIMES}] ${data.bamboozled}`)
         
-        setProgress(100*data.langs.length/TIMES+'%')
+        setProgress(Math.floor(100*data.langs.length/TIMES)+'%')
       }
     }
   }, [outputText])
