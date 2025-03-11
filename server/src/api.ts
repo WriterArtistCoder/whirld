@@ -13,7 +13,7 @@ import { GoogleTranslate } from "./GoogleCloud/GoogleTranslate"
 
 const FALLBACK_LANG = 'en' // Fallback language if source language cannot be used
 const LANGUAGES = [ // TODO Update automatically https://cloud.google.com/translate/docs/basic/discovering-supported-languages
-    'af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs', 'bg', 'ca', 'ceb', 'zh', 'zh-TW', 'co', 'hr', 'cs', 'da', 'nl', 'en', 'eo', 'et', 'fi', 'fr', 'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'he', 'hi', 'hmn', 'hu', 'is', 'ig', 'id', 'ga', 'it', 'ja', 'jv', 'kn', 'kk', 'km', 'rw', 'ko', 'ku', 'ky', 'lo', 'lv', 'lt', 'lb', 'mk', 'mg', 'ms', 'ml', 'mt', 'mi', 'mr', 'mn', 'my', 'ne', 'no', 'ny', 'or', 'ps', 'fa', 'pl', 'pt', 'pa', 'ro', 'ru', 'sm', 'gd', 'sr', 'st', 'sn', 'sd', 'si', 'sk', 'sl', 'so', 'es', 'su', 'sw', 'sv', 'tl', 'tg', 'ta', 'tt', 'te', 'th', 'tr', 'tk', 'uk', 'ur', 'ug', 'uz', 'vi', 'cy', 'xh', 'yi', 'yo', 'zu']
+    'be', 'bg', 'br', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et', 'eo', 'eu', 'fi', 'fo', 'fr', 'fy', 'ga', 'gd', 'gl', 'gv', 'he', 'hr', 'hu', 'is', 'it', 'ka', 'kl', 'kw', 'la', 'lb', 'lt', 'lv', 'mk', 'mt', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sq', 'sr', 'sv', 'tr', 'uk', 'wen']
 const OH_CRAP_LIMIT = 5 // Fold after 5 consecutive unsuccessful translations
 const TIMEOUT_AFTER = 2 * 60 * 1000 // Time out after 2 minutes
 
@@ -32,9 +32,9 @@ enum Pref {
     REDACT
 }
 const WHAT_TO_LOG = { // TODO set this through command line flags
-    languages: Pref.SOME,
+    languages: Pref.ALL,
     progress: Pref.ALL,
-    translation: Pref.SOME
+    translation: Pref.ALL
 }
 const ANSI_LOGGING = true // Toggle ANSI formatting
 
@@ -169,9 +169,11 @@ wss.on('connection', function connection(ws : WebSocket) {
                 }
                 langLog += ' > ' + nextLang
 
+                let weirdLang = LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
+                if (i==times) weirdLang = prevLang
                 try {
                     // Perform a translation
-                    translation = await gt.translateText(translation, nextLang, prevLang)
+                    translation = await gt.translateText(translation, nextLang, weirdLang)
 
                     // If lang not yet detected, extract detected language
                     if (langStat == LangStatus.UNDET && i==0) {

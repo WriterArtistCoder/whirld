@@ -1,0 +1,335 @@
+2025-03-11T02:05:28.767Z WHIRLD server is running on port 3193 
+
+2025-03-11T02:05:30.275Z New WebSocket connection a501e813-78b1-48b2-83c2-e808fb383f18
+
+2025-03-11T02:06:12.378Z New WebSocket connection f3859c98-fe4e-4c47-985f-51b1c1d78eec
+  
+
+
+2025-03-11T02:06:13.007Z POST /api/scramble f3859c98-fe4e-4c47-985f-51b1c1d78eec 
+2025-03-11T02:06:13.008Z en 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 0/30 (0.0%) 
+ Seeking to sell or license his patent, Kimble met with the president of Marvel’s corporate predecessor to discuss his idea for web-slinging fun. Soon afterward, but without remunerating Kimble, that company began marketing the “Web Blaster”—a toy that, like Kimble’s patented invention, enables would-be action heroes to mimic Spider-Man through the use of a polyester glove and a canister of foam.
+ 
+2025-03-11T02:06:13.519Z en > cs 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 1/30 (3.3%) 
+ Ve snaze prodat nebo licencovat svůj patent se Kimble setkal s prezidentem předchůdce společnosti Marvel, aby prodiskutoval jeho nápad na zábavu s webem. Brzy poté, ale bez odměny Kimble, tato společnost začala prodávat „Web Blaster“ – hračku, která, stejně jako Kimbleův patentovaný vynález, umožňuje případným akčním hrdinům napodobit Spider-Mana pomocí polyesterové rukavice a kanystru pěny.
+ 
+2025-03-11T02:06:13.742Z en > cs > ga 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 2/30 (6.7%) 
+ In iarracht a phaitinn a dhíol nó a cheadúnú, bhuail Kimble le huachtarán na cuideachta réamhtheachtaí Marvel chun a smaoineamh le haghaidh siamsaíochta gréasán-bhunaithe a phlé. Go luath ina dhiaidh sin, ach gan creidmheas Kimble, thosaigh an chuideachta ag díol an "Web Blaster" - bréagán a ligeann, cosúil le haireagán paitinnithe Kimble, do laochra gníomhaíochta aithris a dhéanamh ar Spider-Man ag baint úsáide as lámhainní poileistear agus canister cúr.
+ 
+2025-03-11T02:06:13.929Z en > cs > ga > pl 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 3/30 (10.0%) 
+ Próbując sprzedać lub uzyskać licencję na swój patent, Kimble spotkał się z prezesem firmy będącej poprzedniczką Marvela, aby omówić swój pomysł na rozrywkę internetową. Niedługo potem, ale już bez uprzedzenia Kimble'a, firma zaczęła sprzedawać „Web Blaster” – zabawkę, która, podobnie jak opatentowany wynalazek Kimble'a, pozwala bohaterom akcji naśladować Spider-Mana, używając poliestrowych rękawiczek i piankowego pojemnika.
+ 
+2025-03-11T02:06:14.165Z en > cs > ga > pl > lb 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 4/30 (13.3%) 
+ Probéiert säi Patent ze verkafen oder ze lizenzéieren, Kimble huet mam President vun der Marvel senger Virgängerfirma getraff fir seng Iddi fir Internet Entertainment ze diskutéieren. Kuerz drop, awer ouni dem Kimble säi Wëssen, huet d'Firma ugefaang de "Web Blaster" ze verkafen - e Spillsaach dat, wéi dem Kimble seng patentéiert Erfindung, Actionhelden erlaabt de Spider-Man mat Polyesterhandschuesch an engem Schaumbehälter ze imitéieren.
+ 
+2025-03-11T02:06:14.402Z en > cs > ga > pl > lb > gv 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 5/30 (16.7%) 
+ As t'eh er n'yannoo ymmyd jeh'n patent son ymmyd ny license, t'eh er n'eiyrt rish y laghyn-lhee jeh'n Marvel dy choyrt cead da dy follaghey ad son Internet Entertainment. Kuerz Drop, ta fys echey er Kimble, t'eh glenney y brand "Web Blaster" - as t'eh s'cosoylagh dy vel, myr ta Kimble er n'yannoo rannagyn, ta figyraghyn obbree cur Spider-Man ayns gloves polyester 'sy red cheddin t'eh ymmyrkey.
+ 
+2025-03-11T02:06:14.642Z en > cs > ga > pl > lb > gv > he 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 6/30 (20.0%) 
+ כפי שניתן לראות מהפטנט והרישיון, Marvel היא החברה היחידה שיש לה את הזכות להפיץ את מוצריה ל-Internet Entertainment. Kuerz Drop, ta fys echey er Kimble, t'eh glenney y מותג "Web Blaster" - כמו t'eh s'cosoylagh dy vel, myr ta Kimble er n'yannoo rannagyn, to figyraghyn obbree cur as Spider-Man ayns כפפות פוליאסטר 'סי red cheddin t'eh.
+ 
+2025-03-11T02:06:14.747Z  Unexpected error 
+Request failed with status code 400
+{
+  code: 400,
+  message: 'Bad language pair: fy|wen',
+  errors: [
+    {
+      message: 'Bad language pair: fy|wen',
+      domain: 'global',
+      reason: 'badRequest'
+    }
+  ],
+  details: [
+    {
+      '@type': 'type.googleapis.com/google.rpc.BadRequest',
+      fieldViolations: [Array]
+    }
+  ]
+}
+
+
+2025-03-11T02:06:14.981Z en > cs > ga > pl > lb > gv > he > wen > no 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 7/30 (23.3%) +1 aborted attempt 
+ Som det fremgår av patentet og lisensen, er Marvel det eneste selskapet som har rett til å distribuere produktene sine til Internet Entertainment. Kuerz Drop, ta fys echey er Kimble, t'eh glenney y bráke "Web Blaster" - khôm t'eh s'cosoylagh dy vel, myr ta Kimble er n'yannoo rannagyn, til figyraghyn obbree cur as Spider-Man ayns méchés' cheddinsi cheddin '.
+ 
+2025-03-11T02:06:15.238Z en > cs > ga > pl > lb > gv > he > wen > no > br 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 8/30 (26.7%) +1 aborted attempt 
+ Evel m'eo meneget er breved hag en aotre, Marvel eo an embregerezh nemetañ en deus ar gwir da skignañ e broduioù da Internet Entertainment. Short Drop, mignon Kimble, a zo ur "Web Blaster" - unan mat-tre, Kimble a zo un tamm slob, hag ar skeudenn a zo un tamm Spider-Man.
+ 
+2025-03-11T02:06:15.550Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 9/30 (30.0%) +1 aborted attempt 
+ Okrem zvládnutia stručnosti sa Marvel rozhodol pokračovať vo výrobe a vysielaní Internet Entertainment. Short Drop, roztomilý Kimble, s tvojím "Web Blasterom" - mat-tre, Kimble s malým flákačom, baba na skeudenn s malým Spider-Manom.
+ 
+2025-03-11T02:06:15.663Z  Unexpected error 
+Request failed with status code 400
+{
+  code: 400,
+  message: 'Bad language pair: sr|sr',
+  errors: [
+    {
+      message: 'Bad language pair: sr|sr',
+      domain: 'global',
+      reason: 'badRequest'
+    }
+  ],
+  details: [
+    {
+      '@type': 'type.googleapis.com/google.rpc.BadRequest',
+      fieldViolations: [Array]
+    }
+  ]
+}
+
+
+2025-03-11T02:06:15.895Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 10/30 (33.3%) +2 aborted attempts 
+ Marvel Universe on tukenut korkealaatuisen Internet Entertainmentin kehitystä. Short Drop, pyöreä Kimble, jossa on TV "Web Blasterom" - mat-tre, Kimblellä on hämähäkki, skeudenn isällä on Hämähäkkimies.
+ 
+2025-03-11T02:06:15.998Z  Unexpected error 
+Request failed with status code 400
+{
+  code: 400,
+  message: 'Bad language pair: sl|sl',
+  errors: [
+    {
+      message: 'Bad language pair: sl|sl',
+      domain: 'global',
+      reason: 'badRequest'
+    }
+  ],
+  details: [
+    {
+      '@type': 'type.googleapis.com/google.rpc.BadRequest',
+      fieldViolations: [Array]
+    }
+  ]
+}
+
+
+2025-03-11T02:06:16.216Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 11/30 (36.7%) +3 aborted attempts 
+ Marvel Universe hat de ûntwikkeling fan ynternetfermaak fan hege kwaliteit stipe. Koarte Drop, round Kimble, mei in TV "Web Blaster" - mat-tre, Kimble hat in spin, it ferhaal syn heit hat in Spider-Man.
+ 
+2025-03-11T02:06:16.441Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 12/30 (40.0%) +3 aborted attempts 
+ Marvel Universe-k kalitate handiko estipeen garapena du. Card Drop, Kimble biribila, "Web Blaster" telebistan maiatzean - mat-hiru, Kimblek biraka du, Spider-Man-en duen portaera.
+ 
+2025-03-11T02:06:16.583Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 13/30 (43.3%) +3 aborted attempts 
+ Marvel Universe-k quality high quality estipeen develaena du. Card Drop, Kimble biribila, "Web Blaster" televijan maiatzean - mat-hiru, Kimblek biraka du, Spider-Man-en duen portaera.
+ 
+2025-03-11T02:06:16.706Z  Unexpected error 
+Request failed with status code 400
+{
+  code: 400,
+  message: 'Bad language pair: la|kw',
+  errors: [
+    {
+      message: 'Bad language pair: la|kw',
+      domain: 'global',
+      reason: 'badRequest'
+    }
+  ],
+  details: [
+    {
+      '@type': 'type.googleapis.com/google.rpc.BadRequest',
+      fieldViolations: [Array]
+    }
+  ]
+}
+
+
+2025-03-11T02:06:16.845Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 14/30 (46.7%) +4 aborted attempts 
+ Marvel Universe-k càileachd àrd inbhe estipeen develaena du. Card Drop, Kimble biribila, telebhisean "Web Blaster" - mat-hiru, Kimblek biraka du, Spider-Man-en duen portaera.
+ 
+2025-03-11T02:06:17.017Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 15/30 (50.0%) +4 aborted attempts 
+ Marvel Universe má vysokou kvalitu. Card Drop, Kimble se točí, televize "Web Blaster" - mat, Kimble se točí, chování Spider-Mana.
+ 
+2025-03-11T02:06:17.206Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 16/30 (53.3%) +4 aborted attempts 
+ Marvel-universet er av høy kvalitet. Card Drop, Kimble-spinn, "Web Blaster"-TV - sjakkmatt, Kimble-spinn, Spider-Man-oppførsel.
+ 
+2025-03-11T02:06:17.496Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 17/30 (56.7%) +4 aborted attempts 
+ Marveli universum on kõrge kvaliteediga. Card Drop, Kimble spin, "Web Blaster" TV - matt, Kimble spin, Spider-Man käitumine.
+ 
+2025-03-11T02:06:17.703Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 18/30 (60.0%) +4 aborted attempts 
+ Das Marvel-Universum ist von hoher Qualität. Karten fallen lassen, Kimble-Spin, „Web Blaster“ TV – Schachmatt, Kimble-Spin, Spider-Man-Verhalten.
+ 
+2025-03-11T02:06:17.783Z  Unexpected error 
+Request failed with status code 400
+{
+  code: 400,
+  message: 'Bad language pair: wen|ru',
+  errors: [
+    {
+      message: 'Bad language pair: wen|ru',
+      domain: 'global',
+      reason: 'badRequest'
+    }
+  ],
+  details: [
+    {
+      '@type': 'type.googleapis.com/google.rpc.BadRequest',
+      fieldViolations: [Array]
+    }
+  ]
+}
+
+
+2025-03-11T02:06:17.992Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 19/30 (63.3%) +5 aborted attempts 
+ Marvel Unibertsoa kalitate handiagokoa da. Cards Fallen Lapse, Kimble-Spin, "Web Blaster" TV - Schachmatt, Kimble-Spin, Spider-Man Stories.
+ 
+2025-03-11T02:06:18.200Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 20/30 (66.7%) +5 aborted attempts 
+ Marveli universum on kvaliteetsem. Kaardid Fallen Lapse, Kimble-Spin, "Web Blasteri" teler – Checkmate, Kimble-Spin, Spider-Man Stories.
+ 
+2025-03-11T02:06:18.426Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et > gd 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 21/30 (70.0%) +5 aborted attempts 
+ Marveli universe ann an deagh chàileachd. Cardid Fallen Lapse, Kimble-Spin, cunntairean "Web Blaster" - Checkmate, Kimble-Spin, Sgeulachdan Spider-Man.
+ 
+2025-03-11T02:06:18.691Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et > gd > de 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 22/30 (73.3%) +5 aborted attempts 
+ Marvel-Universum in guter Qualität. Cardid Fallen Lapse, Kimble-Spin, „Web Blaster“-Karten – Checkmate, Kimble-Spin, Spider-Man-Geschichten.
+ 
+2025-03-11T02:06:18.921Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et > gd > de > nl 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 23/30 (76.7%) +5 aborted attempts 
+ Marvel universum in goede kwaliteit. Cardid Fallen Lapse, Kimble Spin, "Web Blaster"-kaarten - Checkmate, Kimble Spin, Spider-Man-verhalen.
+ 
+2025-03-11T02:06:19.123Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et > gd > de > nl > gd 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 24/30 (80.0%) +5 aborted attempts 
+ Marvel universe ann an deagh chàileachd. Cardid Fallen Lapse, Kimble Spin, cairtean "Web Blaster" - Checkmate, Kimble Spin, sgeulachdan Spider-Man.
+ 
+2025-03-11T02:06:19.321Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et > gd > de > nl > gd > lb 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 25/30 (83.3%) +5 aborted attempts 
+ Marvel Universum an an deagh chàileachd. Cardid Fallen Lapse, Kimble Spin, cairtean "Web Blaster" - Checkmate, Kimble Spin, sgeulachdan Spider-Man.
+ 
+2025-03-11T02:06:19.659Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et > gd > de > nl > gd > lb > sk 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 26/30 (86.7%) +5 aborted attempts 
+ Marvel Universe a Deagh Universe. Cardid Fallen Lapse, Kimble Spin, cairtean "Web Blaster" - mat, Kimble Spin, sgeulachdan Spider-Man.
+ 
+2025-03-11T02:06:19.863Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et > gd > de > nl > gd > lb > sk > es 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 27/30 (90.0%) +5 aborted attempts 
+ Del Universo Marvel al Universo Team. Cardid Fallen Lapse, Kimble Spin, cairtean "Web Blaster" - mat, Kimble Spin, sgeulachdan Spider-Man.
+ 
+2025-03-11T02:06:20.072Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et > gd > de > nl > gd > lb > sk > es > sk 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 28/30 (93.3%) +5 aborted attempts 
+ Tím Del Universe Marvel al Universo. Cardid Fallen Lapse, Kimble Spin, nazývaný "Web Blaster" - mat, Kimble Spin, pripomína Spider-Mana.
+ 
+2025-03-11T02:06:20.263Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et > gd > de > nl > gd > lb > sk > es > sk > et 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 29/30 (96.7%) +5 aborted attempts 
+ Aeg Marveli universumist universumini. Cardid Fallen Lapse, Kimble Spin, nimega "Web Blaster" – matt, Kimble Spin, meenutab Spider-Mani.
+ 
+2025-03-11T02:06:20.408Z en > cs > ga > pl > lb > gv > he > wen > no > br > sk > sr > fi > sl > fy > eu > en > kw > gd > cs > no > et > de > ru > eu > et > gd > de > nl > gd > lb > sk > es > sk > et > en 
+f3859c98-fe4e-4c47-985f-51b1c1d78eec 30/30 (100.0%) +5 aborted attempts 
+ Time from Marvel Universe to Universe. Cards Fallen Lapse, Kimble Spin, named "Web Blaster" - matte, Kimble Spin, reminiscent of Spider-Man.
+ 
+2025-03-11T02:07:05.761Z WebSocket connection ended ee0c6389-6f6b-4c9d-9a08-548bed1f0d1a
+
+2025-03-11T02:07:06.090Z New WebSocket connection a23b8547-e0f4-4658-9f9c-23fb54726ae2
+  
+
+
+2025-03-11T02:07:07.064Z POST /api/scramble a23b8547-e0f4-4658-9f9c-23fb54726ae2 
+2025-03-11T02:07:07.065Z en 
+a23b8547-e0f4-4658-9f9c-23fb54726ae2 0/5 (0.0%) 
+ Seeking to sell or license his patent, Kimble met with the president of Marvel’s corporate predecessor to discuss his idea for web-slinging fun. Soon afterward, but without remunerating Kimble, that company began marketing the “Web Blaster”—a toy that, like Kimble’s patented invention, enables would-be action heroes to mimic Spider-Man through the use of a polyester glove and a canister of foam.
+ 
+2025-03-11T02:07:07.295Z en > et 
+a23b8547-e0f4-4658-9f9c-23fb54726ae2 1/5 (20.0%) 
+ Soovides oma patenti müüa või litsentsida, kohtus Kimble Marveli ettevõtte eelkäija presidendiga, et arutada tema ideed veebipõhiseks lõbutsemiseks. Varsti pärast seda, kuid Kimble'ile tasu maksmata, hakkas see ettevõte turustama "Web Blasterit" – mänguasja, mis sarnaselt Kimble'i patenteeritud leiutisega võimaldab potentsiaalsetel kangelastel jäljendada Ämblikmeest polüesterkinda ja vahukanistri abil.
+ 
+2025-03-11T02:07:07.497Z en > et > sk 
+a23b8547-e0f4-4658-9f9c-23fb54726ae2 2/5 (40.0%) 
+ Soovides, ktorý bol majiteľom patentu, povedal, že Kimble Marveli bol posledným prezidentom Spojených štátov a že predmet tejto myšlienky bol hlavným zdrojom kontroverzií. Prvým krokom je nájsť Kimbleov podpis, čo je jednoduchý a vysoko sofistikovaný nástroj, ktorý je schopný zvládnuť širokú škálu úloh.
+ 
+2025-03-11T02:07:07.714Z en > et > sk > fo 
+a23b8547-e0f4-4658-9f9c-23fb54726ae2 3/5 (60.0%) 
+ Soovides, sum var patenteigarin, segði, at Kimble Marveli var seinasti forseti í USA, og at evnið í hesum hugskotinum var ein stór kelda til ósemjur. Fyrsta stigið er at finna undirskriftina hjá Kimble, sum er eitt einfalt og sera sofistikerat amboð, sum kann handfara eitt breitt úrval av uppgávum.
+ 
+2025-03-11T02:07:07.952Z en > et > sk > fo > tr 
+a23b8547-e0f4-4658-9f9c-23fb54726ae2 4/5 (80.0%) 
+ Patentin sahibi olan Soovides, Kimble Marvel'ın ABD'nin son başkanı olduğunu, bu düşüncenin konusunun büyük bir fikir ayrılığı kaynağı olduğunu söyledi. İlk adım, çok çeşitli görevleri yerine getirebilen basit ve oldukça gelişmiş bir araç olan Kimble'ın imzasını bulmaktır.
+ 
+2025-03-11T02:07:08.105Z en > et > sk > fo > tr > en 
+a23b8547-e0f4-4658-9f9c-23fb54726ae2 5/5 (100.0%) 
+ Soovides, who owns the patent, said Kimble Marvel was the last president of the United States, a subject of great disagreement. The first step is to find Kimble's signature, a simple and highly sophisticated tool that can perform a wide variety of tasks.
+ 
+
+2025-03-11T02:07:08.847Z WebSocket connection ended a23b8547-e0f4-4658-9f9c-23fb54726ae2
+
+2025-03-11T02:07:08.889Z New WebSocket connection ae72e721-2539-47c0-8414-94d3d422a0bd
+  
+
+
+2025-03-11T02:07:09.725Z POST /api/scramble ae72e721-2539-47c0-8414-94d3d422a0bd 
+2025-03-11T02:07:09.726Z en 
+ae72e721-2539-47c0-8414-94d3d422a0bd 0/5 (0.0%) 
+ Seeking to sell or license his patent, Kimble met with the president of Marvel’s corporate predecessor to discuss his idea for web-slinging fun. Soon afterward, but without remunerating Kimble, that company began marketing the “Web Blaster”—a toy that, like Kimble’s patented invention, enables would-be action heroes to mimic Spider-Man through the use of a polyester glove and a canister of foam.
+ 
+2025-03-11T02:07:09.983Z en > ca 
+ae72e721-2539-47c0-8414-94d3d422a0bd 1/5 (20.0%) 
+ Buscant vendre o llicenciar la seva patent, Kimble es va reunir amb el president del predecessor corporatiu de Marvel per discutir la seva idea de diversió amb la web. Poc després, però sense remunerar a Kimble, aquesta empresa va començar a comercialitzar el "Web Blaster", una joguina que, com la invenció patentada de Kimble, permet als aspirants a herois d'acció imitar a Spider-Man mitjançant l'ús d'un guant de polièster i un recipient d'escuma.
+ 
+2025-03-11T02:07:10.201Z en > ca > gl 
+ae72e721-2539-47c0-8414-94d3d422a0bd 2/5 (40.0%) 
+ Buscando vender ou licenciar a súa patente, Kimble reuniuse co presidente do predecesor corporativo de Marvel para discutir a súa idea dun desvío baseado na web. Pouco despois, pero sen pagarlle a Kimble, esta empresa comezou a comercializar o "Web Blaster", un xoguete que, como o invento patentado de Kimble, permite aos aspirantes a heroes de acción imitar a Spiderman mediante o uso dunha luva de poliéster e un recipiente de escuma.
+ 
+2025-03-11T02:07:10.426Z en > ca > gl > ca 
+ae72e721-2539-47c0-8414-94d3d422a0bd 3/5 (60.0%) 
+ Buscant vendre o llicenciar la seva patent, Kimble es va reunir amb el president del predecessor corporatiu de Marvel per discutir la seva idea d'un spin-off basat en web. Poc després, però sense pagar a Kimble, aquesta empresa va començar a comercialitzar el "Web Blaster", una joguina que, com l'invent patentat de Kimble, permet als aspirants a herois d'acció imitar a Spiderman mitjançant l'ús d'un guant de polièster i un recipient d'escuma.
+ 
+2025-03-11T02:07:10.634Z en > ca > gl > ca > gd 
+ae72e721-2539-47c0-8414-94d3d422a0bd 4/5 (80.0%) 
+ A’ coimhead ri a pheutant a reic no a cheadachadh, choinnich Kimble ris a’ cheann-suidhe air an ro-innleachd corporra Marvel gus beachdachadh air a bheachd airson toradh stèidhichte air an lìon. Goirid às deidh sin, ach gun a bhith a 'pàigheadh Kimble, thòisich a' chompanaidh seo a 'margaidheachd an "Web Blaster", dèideag a tha, mar an innleachd le patent Kimble, a' toirt cothrom do ghaisgich gnìomha a bhith ag aithris Spiderman tro bhith a 'cleachdadh miotag polyester agus soitheach foam.
+ 
+2025-03-11T02:07:10.775Z en > ca > gl > ca > gd > en 
+ae72e721-2539-47c0-8414-94d3d422a0bd 5/5 (100.0%) 
+ Looking to sell or license his patent, Kimble met with Marvel's president of corporate strategy to discuss his idea for a web-based product. Shortly thereafter, but without paying Kimble, the company began marketing the "Web Blaster," a toy that, like Kimble's patented invention, allowed action heroes to emulate Spiderman through the use of a polyester glove and a foam core.
+ 
+
+2025-03-11T02:07:11.192Z WebSocket connection ended ae72e721-2539-47c0-8414-94d3d422a0bd
+
+2025-03-11T02:07:11.244Z New WebSocket connection b3b3d93b-af80-409c-afb7-76bf402b0caa
+  
+
+
+2025-03-11T02:07:12.276Z POST /api/scramble b3b3d93b-af80-409c-afb7-76bf402b0caa 
+2025-03-11T02:07:12.277Z en 
+b3b3d93b-af80-409c-afb7-76bf402b0caa 0/5 (0.0%) 
+ Seeking to sell or license his patent, Kimble met with the president of Marvel’s corporate predecessor to discuss his idea for web-slinging fun. Soon afterward, but without remunerating Kimble, that company began marketing the “Web Blaster”—a toy that, like Kimble’s patented invention, enables would-be action heroes to mimic Spider-Man through the use of a polyester glove and a canister of foam.
+ 
+2025-03-11T02:07:12.507Z en > mt 
+b3b3d93b-af80-409c-afb7-76bf402b0caa 1/5 (20.0%) 
+ Waqt li kien qed ifittex li jbiegħ jew liċenzja l-privattiva tiegħu, Kimble iltaqa’ mal-president tal-predeċessur korporattiv ta’ Marvel biex jiddiskuti l-idea tiegħu għall-gost tal-web-slinging. Ftit wara, iżda mingħajr ma tħallas lil Kimble, dik il-kumpanija bdiet tqiegħed fis-suq il-“Web Blaster”—ġugarell li, bħall-invenzjoni bi privattiva ta’ Kimble, jippermetti lil eroj ta’ azzjoni li jixtiequ jimitaw lil Spider-Man permezz tal-użu ta’ ingwanta tal-poliester u kontenitur ta’ fowm.
+ 
+2025-03-11T02:07:12.760Z en > mt > es 
+b3b3d93b-af80-409c-afb7-76bf402b0caa 2/5 (40.0%) 
+ Waqt si quieres saber qué está haciendo ifittex, necesitas ser una fiesta privada, Kimble es el nuevo CEO del mundo corporativo y Marvel es el único que conoce la idea de ser parte de la web. Sólo ten cuidado, si vas a jugar con el pequeño Kimble, serás tú quien vea el juego con el mismo nombre que "Web Blaster"; lo único que te importa es la vida privada de Kimble, su pequeño querido, su pequeño Spider-Man, su pequeño pony, su pequeña princesa, su pequeña princesa.
+ 
+2025-03-11T02:07:13.018Z en > mt > es > da 
+b3b3d93b-af80-409c-afb7-76bf402b0caa 3/5 (60.0%) 
+ Når du vil vide, hvad iFix laver, skal du være til en privat fest, Kimble er den nye administrerende direktør for erhvervslivet, og Marvel er den eneste, der kender ideen om at være en del af nettet. Bare vær forsigtig, hvis du skal lege med lille Kimble, vil du være den, der ser spillet med samme navn som "Web Blaster"; Det eneste du bekymrer dig om er Kimbles privatliv, hans lille skat, hans lille Spider-Man, hans lille pony, hans lille prinsesse, hans lille prinsesse.
+ 
+2025-03-11T02:07:13.247Z en > mt > es > da > ka 
+b3b3d93b-af80-409c-afb7-76bf402b0caa 4/5 (80.0%) 
+ როდესაც ხედავთ იმ ბოროტებას, რომელიც iFix-ს უნდა გაეკეთებინა, მიდიხართ კერძო წვეულებაზე, Kimble არის ახალი მმართველი დირექტორი, რომელიც მიიღებს მას, ხოლო Marvel არის ის, ვისაც აქვს საუკეთესო იდეები იმის შესახებ, თუ როგორ უნდა წავიდეს და შეინარჩუნოს იგი სუფთა. ძლივს ელოდებით პატარა კიმბლის მოსვლას, იპოვით მას, ვინც მოხვდა იგივე სახელით, როგორც "ვებ ბლასტერი"; აი რას ნახავთ კიმბლის პირად ცხოვრებაში, ჰანს პატარა სკეიტბორდი, ჰანს პატარა ობობა, ჰანს პატარა პონი, ჰანს პატარა პრინცესა, ჰანს პატარა პრინცესა.
+ 
+2025-03-11T02:07:13.428Z en > mt > es > da > ka > en 
+b3b3d93b-af80-409c-afb7-76bf402b0caa 5/5 (100.0%) 
+ When you see the evil that iFix was supposed to do, you go to a private party, Kimble is the new managing director who will take it over, and Marvel is the one who has the best ideas on how to go about it and keep it clean. You can't wait for little Kimble to arrive, you'll find the one who went by the same name as "Web Blaster"; here's what you'll find in Kimble's personal life, Hans the Little Skateboarder, Hans the Little Spider, Hans the Little Pony, Hans the Little Princess, Hans the Little Princess.
+ 
+
+2025-03-11T02:07:31.109Z New WebSocket connection 995c8d0f-5b28-46d3-baae-164ddaab28e3

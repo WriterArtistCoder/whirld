@@ -1,0 +1,233 @@
+2025-03-11T02:04:27.877Z WHIRLD server is running on port 3193 
+
+2025-03-11T02:04:34.380Z New WebSocket connection f492a7ad-3208-4518-a6a4-e193e6313498
+  
+
+
+2025-03-11T02:04:37.317Z POST /api/scramble f492a7ad-3208-4518-a6a4-e193e6313498 
+2025-03-11T02:04:37.318Z en 
+f492a7ad-3208-4518-a6a4-e193e6313498 0/30 (0.0%) 
+ Seeking to sell or license his patent, Kimble met with the president of Marvel’s corporate predecessor to discuss his idea for web-slinging fun. Soon afterward, but without remunerating Kimble, that company began marketing the “Web Blaster”—a toy that, like Kimble’s patented invention, enables would-be action heroes to mimic Spider-Man through the use of a polyester glove and a canister of foam.
+ 
+2025-03-11T02:04:37.734Z en > yi 
+f492a7ad-3208-4518-a6a4-e193e6313498 1/30 (3.3%) 
+ Kimble זוכט צו פאַרקויפן אָדער דערלויבעניש זיין פּאַטענט, און האָט זיך באגעגנט מיט דעם פּרעזידענט פון מאַרוועל ס פֿירמע פאָרויסגייער צו דיסקוטירן זיין געדאַנק פֿאַר וועב-סלינגינג שפּאַס. באלד דערנאָכדעם, אָבער אָן רימיונערייטינג קימבלע, די פירמע אנגעהויבן פֿאַרקויף די "וועב בלאַסטער" - אַ צאַצקע וואָס, ווי קימבלע ס פּאַטאַנטאַד דערפינדונג, ינייבאַלז וואָלט-זיין קאַמף העלדן צו נאָכמאַכן ספּיידער-מענטש דורך די נוצן פון אַ פּאַליעסטער הענטשקע און אַ קאַנאַסטער פון פּינע.
+ 
+2025-03-11T02:04:38.161Z en > yi > sk 
+f492a7ad-3208-4518-a6a4-e193e6313498 2/30 (6.7%) 
+ Kimble, ktorý chcel predať alebo licencovať svoj patent, sa stretol s prezidentom predchodcu spoločnosti Marvel, aby prediskutoval jeho nápad na zábavu pri prehrávaní webu. Čoskoro nato, ale bez odmeňovania Kimbla, začala spoločnosť predávať „web blaster“ – hračku, ktorá, podobne ako Kimblov patentovaný vynález, umožňuje prípadným akčným hrdinom napodobňovať Spider-Mana pomocou polyesterovej rukavice a penovej nádoby.
+ 
+2025-03-11T02:04:38.378Z en > yi > sk > hmn 
+f492a7ad-3208-4518-a6a4-e193e6313498 3/30 (10.0%) 
+ Kimble, uas xav muag lossis tso cai rau nws daim ntawv tso cai, tau ntsib nrog tus thawj tswj hwm ntawm Marvel lub tuam txhab ua ntej los tham txog nws lub tswv yim rau kev lom zem hauv web. Tsis ntev tom qab ntawd, tab sis tsis them Kimble, lub tuam txhab pib muag "web blaster" - cov khoom ua si uas, zoo li Kimble's patented invention, tso cai rau cov neeg ua yeeb yam yuav coj li Kab laug sab-txiv neej siv hnab looj tes polyester thiab lub thawv ua npuas ncauj.
+ 
+2025-03-11T02:04:38.599Z en > yi > sk > hmn > mr 
+f492a7ad-3208-4518-a6a4-e193e6313498 4/30 (13.3%) 
+ किंबल, जो त्याचा कॉपीराइट विकू इच्छितो किंवा परवाना देऊ इच्छितो, त्याने वेब एंटरटेनमेंटच्या त्याच्या कल्पनेवर चर्चा करण्यासाठी मार्वलच्या कंपनीच्या अध्यक्षांशी आधीच भेट घेतली. त्यानंतर लवकरच, परंतु किंबळेला पैसे न देता, कंपनीने "वेब ब्लास्टर्स" विकण्यास सुरुवात केली - अशी खेळणी जी किंबळेच्या पेटंट केलेल्या शोधाप्रमाणे, कलाकारांना पॉलिस्टर ग्लोव्हज आणि फोम बॉक्स वापरून स्पायडर-मॅन म्हणून पोज देण्याची परवानगी देत होती.
+ 
+2025-03-11T02:04:38.860Z en > yi > sk > hmn > mr > de 
+f492a7ad-3208-4518-a6a4-e193e6313498 5/30 (16.7%) 
+ Kimble, der seine Urheberrechte verkaufen oder lizenzieren möchte, hat sich bereits mit dem Firmenpräsidenten von Marvel getroffen, um seine Idee für Web-Unterhaltung zu besprechen. Kurz darauf begann das Unternehmen, ohne Kimble jedoch zu bezahlen, mit dem Verkauf von „Web Blasters“ – Spielzeugen, die es den Darstellern wie Kimbles patentierter Erfindung ermöglichten, sich mit Polyesterhandschuhen und einer Schaumstoffbox als Spider-Man auszugeben.
+ 
+2025-03-11T02:04:39.084Z en > yi > sk > hmn > mr > de > cy 
+f492a7ad-3208-4518-a6a4-e193e6313498 6/30 (20.0%) 
+ Mae Kimble, sydd eisiau gwerthu neu drwyddedu ei hawlfreintiau, eisoes wedi cyfarfod â llywydd corfforaethol Marvel i drafod ei syniad ar gyfer adloniant gwe. Yn fuan wedi hynny, dechreuodd y cwmni werthu "Web Blasters" - teganau a oedd, fel dyfais patent Kimble, yn caniatáu i actorion ddynwared Spider-Man gan ddefnyddio menig polyester a blwch ewyn - heb dalu Kimble.
+ 
+2025-03-11T02:04:39.330Z en > yi > sk > hmn > mr > de > cy > ceb 
+f492a7ad-3208-4518-a6a4-e193e6313498 7/30 (23.3%) 
+ Si Kimble, kinsa gustong magbaligya o maglisensya sa iyang mga copyright, nakigtagbo na sa presidente sa korporasyon ni Marvel aron hisgutan ang iyang ideya alang sa kalingawan sa web. Wala madugay pagkahuman, ang kompanya nagsugod sa pagbaligya sa "Web Blasters" - mga dulaan nga, sama sa patente nga imbensyon ni Kimble, gitugotan ang mga aktor nga magpakaaron-ingnon nga Spider-Man gamit ang polyester nga gwantes ug usa ka kahon sa bula - nga wala magbayad sa Kimble.
+ 
+2025-03-11T02:04:39.628Z en > yi > sk > hmn > mr > de > cy > ceb > zh 
+f492a7ad-3208-4518-a6a4-e193e6313498 8/30 (26.7%) 
+ 金布尔想要出售或授权其版权，他已经与漫威公司总裁会面，讨论他的网络娱乐想法。此后不久，该公司开始销售“Web Blasters” - 一种玩具，类似于金布尔的专利发明，可以让演员使用涤纶手套和泡沫箱假装成蜘蛛侠 - 而无需向金布尔支付费用。
+ 
+2025-03-11T02:04:39.898Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu 
+f492a7ad-3208-4518-a6a4-e193e6313498 9/30 (30.0%) 
+ કિમ્બલે અધિકારો વેચવા અથવા લાઇસન્સ આપવા માંગે છે, અને તેમણે ઓનલાઇન મનોરંજન માટેના તેમના વિચારની ચર્ચા કરવા માટે માર્વેલના પ્રમુખ સાથે મુલાકાત કરી છે. ત્યાર બાદ તરત જ, કંપનીએ "વેબ બ્લાસ્ટર્સ" - કિમ્બલેની પેટન્ટ કરાયેલ શોધ જેવા રમકડાં વેચવાનું શરૂ કર્યું, જેનાથી કલાકારો પોલિએસ્ટર ગ્લોવ્સ અને ફોમ બોક્સનો ઉપયોગ કરીને સ્પાઈડર-મેન હોવાનો ડોળ કરી શકતા હતા - કિમ્બલેને ફી ચૂકવ્યા વિના.
+ 
+2025-03-11T02:04:40.285Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW 
+f492a7ad-3208-4518-a6a4-e193e6313498 10/30 (33.3%) 
+ 金布爾希望出售或授權這些權利，並且他已經與漫威總裁會面，討論他的線上娛樂想法。此後不久，該公司開始銷售“Web Blasters”之類的玩具 - 這是金布爾的專利發明，表演者可以使用滌綸手套和泡沫箱假裝自己是蜘蛛人 - 而無需向金布爾支付任何費用。
+ 
+2025-03-11T02:04:40.532Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq 
+f492a7ad-3208-4518-a6a4-e193e6313498 11/30 (36.7%) 
+ Kimble shpreson të shesë ose licencojë të drejtat dhe ai është takuar me presidentin e Marvel për të diskutuar idetë e tij të argëtimit në internet. Menjëherë pas kësaj, kompania filloi të shesë lodra si "Web Blasters" - një shpikje e patentuar e Kimble's që i lejonte interpretuesit të pretendonin se ishin Spider-Man duke përdorur doreza poliester dhe një kuti shkumë - pa paguar asgjë Kimble.
+ 
+2025-03-11T02:04:40.746Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az 
+f492a7ad-3208-4518-a6a4-e193e6313498 12/30 (40.0%) 
+ Kimbl hüquqları satmağa və ya lisenziyalaşdırmağa ümid edir və o, onlayn əyləncə ideyalarını müzakirə etmək üçün Marvel-in prezidenti ilə görüşdü. Tezliklə şirkət "Web Blasters" kimi oyuncaqlar satmağa başladı - Kimble-in patentləşdirilmiş ixtirası, ifaçılara polyester əlcəklər və köpük qutudan istifadə edərək Hörümçək-adam kimi görünməyə imkan verdi - Kimble heç bir ödəniş etmədən.
+ 
+2025-03-11T02:04:40.977Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo 
+f492a7ad-3208-4518-a6a4-e193e6313498 13/30 (43.3%) 
+ Kimble ຫວັງວ່າຈະຂາຍຫຼືອະນຸຍາດສິດ, ແລະລາວໄດ້ພົບກັບປະທານາທິບໍດີ Marvel ເພື່ອປຶກສາຫາລືກ່ຽວກັບແນວຄວາມຄິດການບັນເທີງອອນໄລນ໌. ທັນທີທີ່ບໍລິສັດໄດ້ເລີ່ມຂາຍຂອງຫຼິ້ນເຊັ່ນ "Web Blasters" - ການປະດິດສ້າງສິດທິບັດຂອງ Kimble ທີ່ອະນຸຍາດໃຫ້ນັກສະແດງມີລັກສະນະຄ້າຍຄື Spider-Man ໂດຍໃຊ້ຖົງມື polyester ແລະກ່ອງໂຟມ - ໂດຍບໍ່ມີການ Kimble ຮຽກເກັບຄ່າບໍລິການໃດໆ.
+ 
+2025-03-11T02:04:41.236Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy 
+f492a7ad-3208-4518-a6a4-e193e6313498 14/30 (46.7%) 
+ Mae Kimble yn gobeithio gwerthu neu drwyddedu'r hawliau, a chyfarfu â llywydd Marvel i drafod y syniad adloniant ar-lein. Yn fuan dechreuodd y cwmni werthu teganau fel "Web Blasters" - dyfais patent Kimble a oedd yn caniatáu i actorion edrych fel Spider-Man gan ddefnyddio menig polyester a blwch ewyn - heb i Kimble godi unrhyw ffioedd.
+ 
+2025-03-11T02:04:41.454Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te 
+f492a7ad-3208-4518-a6a4-e193e6313498 15/30 (50.0%) 
+ కింబుల్ హక్కులను విక్రయించాలని లేదా లైసెన్స్ ఇవ్వాలని భావిస్తోంది మరియు ఆన్‌లైన్ వినోద ఆలోచన గురించి చర్చించడానికి మార్వెల్ అధ్యక్షుడిని కలుసుకున్నాడు. కంపెనీ త్వరలో "వెబ్ బ్లాస్టర్స్" వంటి బొమ్మలను విక్రయించడం ప్రారంభించింది-కింబుల్ యొక్క పేటెంట్ ఆవిష్కరణ, ఇది కింబుల్ ఎటువంటి రుసుము వసూలు చేయకుండా నటీనటులు పాలిస్టర్ గ్లోవ్స్ మరియు ఫోమ్ బాక్స్‌ని ఉపయోగించి స్పైడర్ మాన్ లాగా కనిపించడానికి అనుమతించింది.
+ 
+2025-03-11T02:04:41.683Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml 
+f492a7ad-3208-4518-a6a4-e193e6313498 16/30 (53.3%) 
+ അവകാശങ്ങൾ വിൽക്കുകയോ ലൈസൻസ് നൽകുകയോ ചെയ്യുമെന്ന് കിംബിൾ പ്രതീക്ഷിക്കുന്നു, കൂടാതെ ഓൺലൈൻ വിനോദ ആശയം ചർച്ച ചെയ്യാൻ മാർവലിന്റെ പ്രസിഡന്റുമായി കൂടിക്കാഴ്ച നടത്തി. കമ്പനി താമസിയാതെ "വെബ് ബ്ലാസ്റ്റേഴ്സ്" പോലുള്ള കളിപ്പാട്ടങ്ങൾ വിൽക്കാൻ തുടങ്ങി - കിംബിൾ യാതൊരു ഫീസും ഈടാക്കാതെ പോളിസ്റ്റർ കയ്യുറകളും ഫോം ബോക്സും ഉപയോഗിച്ച് അഭിനേതാക്കളെ സ്പൈഡർമാനെപ്പോലെ തോന്നിപ്പിക്കാൻ അനുവദിച്ച കിംബിളിന്റെ പേറ്റന്റ് കണ്ടുപിടുത്തമാണിത്.
+ 
+2025-03-11T02:04:41.907Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is 
+f492a7ad-3208-4518-a6a4-e193e6313498 17/30 (56.7%) 
+ Kimble vonast til að selja eða veita leyfi fyrir réttindin og hefur fundað með forseta Marvel til að ræða hugmyndina um afþreyingu á netinu. Fyrirtækið byrjaði fljótlega að selja leikföng eins og "Web Blasters" - einkaleyfisskylda uppfinningu Kimble sem gerði leikurum kleift að líta út eins og Spider-Man með pólýesterhönskum og froðuboxi, án þess að rukka nein gjöld.
+ 
+2025-03-11T02:04:42.134Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd 
+f492a7ad-3208-4518-a6a4-e193e6313498 18/30 (60.0%) 
+ ڪمبل حقن کي وڪڻڻ يا لائسنس ڏيڻ جي اميد رکي ٿو ۽ آن لائن تفريح جي خيال تي بحث ڪرڻ لاءِ مارول جي صدر سان ملاقات ڪئي آهي. ڪمپني جلد ئي "ويب بلاسٽرز" جهڙا رانديڪا وڪڻڻ شروع ڪيا - ڪمبل جي پيٽنٽ ٿيل ايجاد جيڪا رانديگرن کي پاليسٽر دستانن ۽ فوم باڪس سان اسپائيڊر مين وانگر نظر اچڻ جي اجازت ڏني، بغير ڪنهن فيس جي.
+ 
+2025-03-11T02:04:42.333Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru 
+f492a7ad-3208-4518-a6a4-e193e6313498 19/30 (63.3%) 
+ Камбл надеется продать или лицензировать права и встретился с президентом Marvel, чтобы обсудить идею онлайн-развлечений. Вскоре компания начала продавать игрушки, такие как «Web Blasters» — запатентованное изобретение Кэмбла, позволяющее игрокам выглядеть как Человек-паук с помощью полиэстеровых перчаток и пенопластовой коробки, причем все это бесплатно.
+ 
+2025-03-11T02:04:42.532Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca 
+f492a7ad-3208-4518-a6a4-e193e6313498 20/30 (66.7%) 
+ Kumble espera vendre o llicenciar els drets i s'ha reunit amb el president de Marvel per discutir la idea de l'entreteniment en línia. La companyia aviat va començar a vendre joguines com "Web Blasters", una invenció patentada de Campbell que permetia als jugadors semblar-se a Spider-Man amb guants de polièster i una caixa d'escuma, tot de manera gratuïta.
+ 
+2025-03-11T02:04:42.745Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca > de 
+f492a7ad-3208-4518-a6a4-e193e6313498 21/30 (70.0%) 
+ Kumble hofft, die Rechte verkaufen oder lizenzieren zu können und hat sich mit dem Präsidenten von Marvel getroffen, um die Idee der Online-Unterhaltung zu besprechen. Schon bald begann das Unternehmen damit, Spielzeuge wie „Web Blasters“ zu verkaufen, eine patentierte Erfindung von Campbell, die es Spielern ermöglichte, mit Polyesterhandschuhen und einer Schaumstoffbox wie Spider-Man auszusehen – und das alles kostenlos.
+ 
+2025-03-11T02:04:42.968Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca > de > te 
+f492a7ad-3208-4518-a6a4-e193e6313498 22/30 (73.3%) 
+ కుంబ్లే హక్కులను విక్రయించాలని లేదా లైసెన్స్ పొందాలని ఆశిస్తున్నాడు మరియు ఆన్‌లైన్ వినోదం ఆలోచన గురించి చర్చించడానికి మార్వెల్ అధ్యక్షుడిని కలిశాడు. ఆ కంపెనీ త్వరలోనే "వెబ్ బ్లాస్టర్స్" వంటి బొమ్మలను అమ్మడం ప్రారంభించింది, ఇది కాంప్‌బెల్ పేటెంట్ పొందిన ఆవిష్కరణ, ఇది ఆటగాళ్ళు పాలిస్టర్ గ్లోవ్స్ మరియు ఫోమ్ బాక్స్ ఉపయోగించి స్పైడర్ మ్యాన్ లాగా కనిపించడానికి వీలు కల్పించింది - అన్నీ ఉచితంగా.
+ 
+2025-03-11T02:04:43.179Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca > de > te > ne 
+f492a7ad-3208-4518-a6a4-e193e6313498 23/30 (76.7%) 
+ कुम्बलेले अधिकारहरू बेच्ने वा इजाजतपत्र दिने आशा राखेका छन् र अनलाइन मनोरञ्जनको विचारमा छलफल गर्न मार्भलका अध्यक्षसँग भेटेका छन्। त्यो कम्पनीले चाँडै नै "वेब ब्लास्टर्स" जस्ता खेलौनाहरू बेच्न थाल्यो, जुन क्याम्पबेलले पेटेन्ट गरेको आविष्कार थियो जसले खेलाडीहरूलाई पलिएस्टर पन्जा र फोम बक्स प्रयोग गरेर स्पाइडर-म्यान जस्तो देखिन अनुमति दियो - सबै नि:शुल्क।
+ 
+2025-03-11T02:04:43.488Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca > de > te > ne > ml 
+f492a7ad-3208-4518-a6a4-e193e6313498 24/30 (80.0%) 
+ അവകാശങ്ങൾ വിൽക്കുകയോ ലൈസൻസ് നൽകുകയോ ചെയ്യുമെന്ന് കുംബ്ലെ പ്രതീക്ഷിക്കുന്നു, കൂടാതെ ഓൺലൈൻ വിനോദത്തിന്റെ ആശയം ചർച്ച ചെയ്യാൻ മാർവലിന്റെ പ്രസിഡന്റുമായി കൂടിക്കാഴ്ച നടത്തി. ആ കമ്പനി താമസിയാതെ "വെബ് ബ്ലാസ്റ്റേഴ്സ്" പോലുള്ള കളിപ്പാട്ടങ്ങൾ വിൽക്കാൻ തുടങ്ങി, കാംബെൽ പേറ്റന്റ് ചെയ്ത ഒരു കണ്ടുപിടുത്തമാണിത്, പോളിസ്റ്റർ കയ്യുറകളും ഫോം ബോക്സും ഉപയോഗിച്ച് കളിക്കാർക്ക് സ്പൈഡർമാൻ പോലെ തോന്നിക്കാൻ ഇത് അനുവദിച്ചു - എല്ലാം സൗജന്യമായി.
+ 
+2025-03-11T02:04:43.763Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca > de > te > ne > ml > ceb 
+f492a7ad-3208-4518-a6a4-e193e6313498 25/30 (83.3%) 
+ Naglaum si Kumble nga ibaligya o lisensyahan ang mga katungod, ug nakigkita sa presidente sa Marvel aron hisgutan ang ideya sa online nga kalingawan. Kana nga kompanya sa wala madugay nagsugod sa pagbaligya sa mga dulaan sama sa "Web Blasters," usa ka imbensyon nga patente ni Campbell nga nagtugot sa mga magdudula nga mobati sama sa Spider-Man gamit ang polyester nga gwantes ug usa ka kahon sa bula - tanan libre.
+ 
+2025-03-11T02:04:43.980Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca > de > te > ne > ml > ceb > bn 
+f492a7ad-3208-4518-a6a4-e193e6313498 26/30 (86.7%) 
+ কুম্বলে স্বত্ব বিক্রি বা লাইসেন্স করার আশা করছেন, এবং অনলাইন বিনোদনের ধারণা নিয়ে আলোচনা করার জন্য মার্ভেলের সভাপতির সাথে দেখা করেছেন। সেই কোম্পানিটি শীঘ্রই "ওয়েব ব্লাস্টার্স" এর মতো খেলনা বিক্রি শুরু করে, ক্যাম্পবেল কর্তৃক পেটেন্ট করা একটি আবিষ্কার যা খেলোয়াড়দের পলিয়েস্টার গ্লাভস এবং ফোমের বাক্স ব্যবহার করে স্পাইডার-ম্যানের মতো অনুভব করতে দেয় - সবই বিনামূল্যে।
+ 
+2025-03-11T02:04:44.203Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca > de > te > ne > ml > ceb > bn > fi 
+f492a7ad-3208-4518-a6a4-e193e6313498 27/30 (90.0%) 
+ Kumble toivoo myyvänsä tai lisensoivansa oikeudet, ja on tavannut Marvelin presidentin keskustellakseen ajatuksesta verkkoviihteestä. Tämä yritys alkoi pian myydä leluja, kuten "Web Blasters", Campbellin patentoima keksintö, jonka avulla pelaajat tunsivat olonsa Hämähäkkimieheksi käyttämällä polyesterikäsineitä ja vaahtomuovilaatikkoa - kaikki ilmaiseksi.
+ 
+2025-03-11T02:04:44.408Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca > de > te > ne > ml > ceb > bn > fi > ur 
+f492a7ad-3208-4518-a6a4-e193e6313498 28/30 (93.3%) 
+ کمبلے کو حقوق بیچنے یا لائسنس دینے کی امید ہے، اور آن لائن تفریح کے خیال پر بات کرنے کے لیے مارول کے صدر سے ملاقات کی ہے۔ اس کمپنی نے جلد ہی "ویب بلاسٹرز" جیسے کھلونے فروخت کرنا شروع کر دیے، یہ ایجاد کیمبل کی پیٹنٹ ہے جس نے کھلاڑیوں کو پالئیےسٹر کے دستانے اور فوم باکس استعمال کر کے اسپائیڈر مین جیسا محسوس کرنے کی اجازت دی - یہ سب کچھ مفت میں۔
+ 
+2025-03-11T02:04:44.633Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca > de > te > ne > ml > ceb > bn > fi > ur > sn 
+f492a7ad-3208-4518-a6a4-e193e6313498 29/30 (96.7%) 
+ Kumble anotarisira kutengesa kana rezinesi kodzero, uye asangana nemutungamiri weMarvel kuti vakurukure nezve zano rekuvaraidza pamhepo. Kambani iyi yakabva yatanga kutengesa matoyi akaita se "Web Blasters," chigadzirwa chine patent naCampbell icho chaibvumira vatambi kunzwa seSpider-Man vachishandisa magurovhosi epolyester uye bhokisi refuro - zvese zvemahara.
+ 
+2025-03-11T02:04:44.779Z en > yi > sk > hmn > mr > de > cy > ceb > zh > gu > zh-TW > sq > az > lo > cy > te > ml > is > sd > ru > ca > de > te > ne > ml > ceb > bn > fi > ur > sn > en 
+f492a7ad-3208-4518-a6a4-e193e6313498 30/30 (100.0%) 
+ Kumble hopes to sell or license the rights, and has met with Marvel executives to discuss an online entertainment idea. The company has since begun selling toys like "Web Blasters," a product patented by Campbell that allowed players to feel like Spider-Man using polyester gloves and a foam box — all for free.
+ 
+
+2025-03-11T02:04:54.706Z New WebSocket connection 2b173921-f726-41c8-9cf8-240379ce22fe
+
+2025-03-11T02:04:55.311Z WebSocket connection ended f492a7ad-3208-4518-a6a4-e193e6313498
+
+2025-03-11T02:04:55.313Z WebSocket connection ended 2b173921-f726-41c8-9cf8-240379ce22fe
+
+2025-03-11T02:04:55.359Z New WebSocket connection 6682a4e3-faea-4f48-9cb7-da6b01854033
+  
+
+
+2025-03-11T02:04:56.230Z POST /api/scramble 6682a4e3-faea-4f48-9cb7-da6b01854033 
+2025-03-11T02:04:56.231Z en 
+6682a4e3-faea-4f48-9cb7-da6b01854033 0/5 (0.0%) 
+ Seeking to sell or license his patent, Kimble met with the president of Marvel’s corporate predecessor to discuss his idea for web-slinging fun. Soon afterward, but without remunerating Kimble, that company began marketing the “Web Blaster”—a toy that, like Kimble’s patented invention, enables would-be action heroes to mimic Spider-Man through the use of a polyester glove and a canister of foam.
+ 
+2025-03-11T02:04:56.383Z en > bs 
+6682a4e3-faea-4f48-9cb7-da6b01854033 1/5 (20.0%) 
+ U želji da proda ili licencira svoj patent, Kimble se sastao s predsjednikom Marvelovog korporativnog prethodnika kako bi razgovarao o njegovoj ideji za zabavu u vezi s internetom. Ubrzo nakon toga, ali bez plaćanja Kimblea, ta kompanija je počela da plasira na tržište "Web Blaster" - igračku koja, poput Kimbleovog patentiranog izuma, omogućava potencijalnim akcionim herojima da oponašaju Spider-Mana koristeći poliestersku rukavicu i kanister s pjenom.
+ 
+2025-03-11T02:04:56.632Z en > bs > hr 
+6682a4e3-faea-4f48-9cb7-da6b01854033 2/5 (40.0%) 
+ U želji da proda ili licencira svoj patent, Kimble se sastao s predsjednikom Marvelovog korporativnog prethodnika kako bi razgovarali o svojoj ideji za zabavu vezanu uz internet. Ubrzo nakon toga, ali bez plaćanja Kimbleu, ta je tvrtka počela reklamirati "Web Blaster" - igračku koja, poput Kimbleova patentiranog izuma, omogućuje budućim akcijskim junacima da oponašaju Spider-Mana pomoću poliesterske rukavice i kanistra pjene.
+ 
+2025-03-11T02:04:56.888Z en > bs > hr > gu 
+6682a4e3-faea-4f48-9cb7-da6b01854033 3/5 (60.0%) 
+ પોતાના પેટન્ટ વેચવા અથવા લાઇસન્સ આપવા માટે ઉત્સુક, કિમ્બલે માર્વેલના કોર્પોરેટ પુરોગામીના પ્રમુખ સાથે મુલાકાત કરી અને ઇન્ટરનેટ-સંબંધિત મનોરંજન માટેના તેમના વિચારની ચર્ચા કરી. થોડા સમય પછી, પરંતુ કિમ્બલને પૈસા આપ્યા વિના, તે કંપનીએ "વેબ બ્લાસ્ટર" ની જાહેરાત કરવાનું શરૂ કર્યું - એક રમકડું જે કિમ્બલની પેટન્ટ કરાયેલ શોધની જેમ, એક્શન હીરોને પોલિએસ્ટર ગ્લોવ અને ફોમના ડબ્બાનો ઉપયોગ કરીને સ્પાઇડર-મેનનું અનુકરણ કરવાની મંજૂરી આપે છે.
+ 
+2025-03-11T02:04:57.129Z en > bs > hr > gu > ku 
+6682a4e3-faea-4f48-9cb7-da6b01854033 4/5 (80.0%) 
+ Bi dilxwazî ku patentên xwe bifroşe an destûr bide, Kimble bi serokê pêşengê pargîdaniya Marvel re hevdîtin kir û ramana xwe ya ji bo şahiya bi Înternetê re nîqaş kir. Demek şûnda, lê bêyî ku drav bide Kimble, wê pargîdanî dest bi reklama "Web Blaster" kir - pêlîstokek ku, mîna dahênana patenkirî ya Kimble, hişt ku lehengê çalakiyê bi karanîna destmalek polester û kefek kefek Spider-Man teqlîd bike.
+ 
+2025-03-11T02:04:57.285Z en > bs > hr > gu > ku > en 
+6682a4e3-faea-4f48-9cb7-da6b01854033 5/5 (100.0%) 
+ Eager to sell or license his patents, Kimble met with the head of the Marvel Entertainment Company and discussed his idea for Internet-based entertainment. Shortly thereafter, but without paying Kimble, the company began advertising the "Web Blaster" - a toy that, like Kimble's patented invention, allowed the action hero to imitate Spider-Man using a polyester glove and a foam core.
+ 
+
+2025-03-11T02:04:57.950Z WebSocket connection ended 6682a4e3-faea-4f48-9cb7-da6b01854033
+
+2025-03-11T02:04:57.998Z New WebSocket connection 5f44eb37-2885-41af-be06-df35c750d4ec
+  
+
+
+2025-03-11T02:04:58.893Z POST /api/scramble 5f44eb37-2885-41af-be06-df35c750d4ec 
+2025-03-11T02:04:58.894Z en 
+5f44eb37-2885-41af-be06-df35c750d4ec 0/5 (0.0%) 
+ Seeking to sell or license his patent, Kimble met with the president of Marvel’s corporate predecessor to discuss his idea for web-slinging fun. Soon afterward, but without remunerating Kimble, that company began marketing the “Web Blaster”—a toy that, like Kimble’s patented invention, enables would-be action heroes to mimic Spider-Man through the use of a polyester glove and a canister of foam.
+ 
+2025-03-11T02:04:59.041Z en > pl 
+5f44eb37-2885-41af-be06-df35c750d4ec 1/5 (20.0%) 
+ Chcąc sprzedać lub licencjonować swój patent, Kimble spotkał się z prezesem korporacyjnego poprzednika Marvela, aby omówić swój pomysł na zabawę w rzucanie pajęczynami. Niedługo potem, ale bez wynagrodzenia dla Kimble'a, firma ta zaczęła sprzedawać „Web Blaster” — zabawkę, która, podobnie jak opatentowany wynalazek Kimble'a, umożliwia potencjalnym bohaterom akcji naśladowanie Spider-Mana za pomocą rękawicy poliestrowej i pojemnika z pianką.
+ 
+2025-03-11T02:04:59.263Z en > pl > kn 
+5f44eb37-2885-41af-be06-df35c750d4ec 2/5 (40.0%) 
+ ತನ್ನ ಪೇಟೆಂಟ್ ಅನ್ನು ಮಾರಾಟ ಮಾಡಲು ಅಥವಾ ಪರವಾನಗಿ ಪಡೆಯಲು ಬಯಸಿದ್ದ ಕಿಂಬಲ್, ವೆಬ್-ಸ್ಲಿಂಗಿಂಗ್ ಆಟದ ಕಲ್ಪನೆಯನ್ನು ಚರ್ಚಿಸಲು ಮಾರ್ವೆಲ್‌ನ ಕಾರ್ಪೊರೇಟ್ ಪೂರ್ವವರ್ತಿಯ ಅಧ್ಯಕ್ಷರನ್ನು ಭೇಟಿಯಾದರು. ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ, ಆದರೆ ಕಿಂಬಲ್‌ಗೆ ಯಾವುದೇ ವೆಚ್ಚವಿಲ್ಲದೆ, ಕಂಪನಿಯು "ವೆಬ್ ಬ್ಲಾಸ್ಟರ್" ಅನ್ನು ಮಾರಾಟ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿತು, ಇದು ಕಿಂಬಲ್‌ನ ಪೇಟೆಂಟ್ ಪಡೆದ ಆವಿಷ್ಕಾರದಂತೆ, ಪಾಲಿಯೆಸ್ಟರ್ ಕೈಗವಸು ಮತ್ತು ಫೋಮ್ ಕ್ಯಾನಿಸ್ಟರ್ ಬಳಸಿ ಸ್ಪೈಡರ್ ಮ್ಯಾನ್ ಅನ್ನು ಅನುಕರಿಸಲು ಆಕ್ಷನ್ ಹೀರೋಗಳಿಗೆ ಅನುವು ಮಾಡಿಕೊಡುವ ಆಟಿಕೆಯಾಗಿದೆ.
+ 
+2025-03-11T02:04:59.535Z en > pl > kn > tg 
+5f44eb37-2885-41af-be06-df35c750d4ec 3/5 (60.0%) 
+ Кимбл, ки мехост патенташро фурӯшад ё литсензия диҳад, бо президенти пешгузаштаи корпоративии Marvel мулоқот кард, то идеяи бозии вебро баррасӣ кунад. Дере нагузашта, аммо бе ягон арзиш ба Кимбл, ширкат ба фурӯши "Web Blaster", бозичае оғоз кард, ки ба монанди ихтирои патентшудаи Кимбл ба қаҳрамонони амал имкон дод, ки бо истифода аз дастпӯшаки полиэстерӣ ва канистри кафк ба одами тортанак тақлид кунанд.
+ 
+2025-03-11T02:04:59.740Z en > pl > kn > tg > mg 
+5f44eb37-2885-41af-be06-df35c750d4ec 4/5 (80.0%) 
+ Kimble, izay te-hivarotra na hanome alalana ny patanty azy, dia nihaona tamin'ny filohan'ny orinasa teo aloha Marvel mba hiresaka momba ny hevitra momba ny lalao web. Fotoana fohy taorian'izay, saingy tsy nisy vidiny ho an'i Kimble, dia nanomboka nivarotra ny "Web Blaster" ny orinasa, kilalao iray izay, tahaka ny noforonin'i Kimble, namela ny mahery fo haka tahaka ny Spider-Man tamin'ny fampiasana fonon-tanana polyester sy tavoahangy foam.
+ 
+2025-03-11T02:04:59.928Z en > pl > kn > tg > mg > en 
+5f44eb37-2885-41af-be06-df35c750d4ec 5/5 (100.0%) 
+ Kimble, who wanted to sell or license his patent, met with the former president of Marvel to discuss the idea of a web-game. Shortly after, but to no avail to Kimble, the company began selling the "Web Blaster," a toy that, like Kimble's own, allowed the superhero to mimic Spider-Man using polyester gloves and a foam tube.
+ 
+
+2025-03-11T02:05:00.303Z WebSocket connection ended 5f44eb37-2885-41af-be06-df35c750d4ec
+
+2025-03-11T02:05:00.350Z New WebSocket connection 48e836c5-a42c-4a57-8823-9e965277b39b
+  
+
+
+2025-03-11T02:05:01.290Z POST /api/scramble 48e836c5-a42c-4a57-8823-9e965277b39b 
+2025-03-11T02:05:01.291Z en 
+48e836c5-a42c-4a57-8823-9e965277b39b 0/5 (0.0%) 
+ Seeking to sell or license his patent, Kimble met with the president of Marvel’s corporate predecessor to discuss his idea for web-slinging fun. Soon afterward, but without remunerating Kimble, that company began marketing the “Web Blaster”—a toy that, like Kimble’s patented invention, enables would-be action heroes to mimic Spider-Man through the use of a polyester glove and a canister of foam.
+ 
+2025-03-11T02:05:01.424Z en > uz 
+48e836c5-a42c-4a57-8823-9e965277b39b 1/5 (20.0%) 
+ O'z patentini sotish yoki litsenziyalash niyatida Kimbl Marvel korporativ salafi prezidenti bilan uchrashib, uning veb-slinging qiziqarli g'oyasini muhokama qildi. Ko'p o'tmay, lekin Kimblga pul bermasdan, kompaniya "Web Blaster" ni sotishni boshladi - bu, Kimblning patentlangan ixtirosi kabi, bo'lajak harakat qahramonlariga poliester qo'lqop va ko'pikli kanistr yordamida O'rgimchak odamga taqlid qilish imkonini beradigan o'yinchoq.
+ 
+2025-03-11T02:05:01.644Z en > uz > ja 
+48e836c5-a42c-4a57-8823-9e965277b39b 2/5 (40.0%) 
+ 特許を売却またはライセンス供与する目的で、キンブルはマーベルの前身企業の社長と会い、ウェブスリングの興味深いアイデアについて話し合った。その後すぐに、同社はキンブルに金銭を与えることなく、「ウェブ ブラスター」の販売を開始した。これは、キンブルの特許取得済みの発明と同様に、ポリエステル製の手袋と発泡スチロール製の容器を使って、アクション ヒーロー志望者がスパイダーマンの真似をすることができるおもちゃである。
+ 
+2025-03-11T02:05:01.883Z en > uz > ja > vi 
+48e836c5-a42c-4a57-8823-9e965277b39b 3/5 (60.0%) 
+ Với mục đích bán hoặc cấp phép bằng sáng chế, Kimble đã gặp chủ tịch của một công ty tiền thân của Marvel và thảo luận về ý tưởng thú vị của mình về trò bắn tơ. Ngay sau đó, công ty bắt đầu bán "Web Blaster" mà không trả tiền cho Kimble. Đây là món đồ chơi cho phép những anh hùng hành động đầy tham vọng bắt chước Người Nhện bằng cách sử dụng găng tay polyester và hộp xốp, tương tự như phát minh được cấp bằng sáng chế của Kimble.
+ 
+2025-03-11T02:05:02.104Z en > uz > ja > vi > sl 
+48e836c5-a42c-4a57-8823-9e965277b39b 4/5 (80.0%) 
+ Z namenom prodaje ali licenciranja patenta se je Kimble srečal s predsednikom podjetja, predhodnika Marvela, in razpravljal o njegovi zanimivi ideji spletnega povezovanja. Kmalu zatem je podjetje začelo prodajati "Web Blaster", ne da bi plačalo Kimbleju. Ta igrača omogoča ambicioznim akcijskim junakom, da posnemajo Spider-Mana z uporabo poliestrskih rokavic in škatle iz pene, podobno kot Kimbleov patentirani izum.
+ 
+2025-03-11T02:05:02.239Z en > uz > ja > vi > sl > en 
+48e836c5-a42c-4a57-8823-9e965277b39b 5/5 (100.0%) 
+ With the intention of selling or licensing the patent, Kimble met with the president of Marvel's predecessor company and discussed his intriguing web-bending idea. Shortly thereafter, the company began selling the "Web Blaster" without paying Kimble. This toy allowed aspiring action heroes to emulate Spider-Man using polyester gloves and a foam box, similar to Kimble's patented invention.
+ 
+2025-03-11T02:05:15.620Z WHIRLD server is running on port 3193 
+2025-03-11T02:05:22.484Z WHIRLD server is running on port 3193 
