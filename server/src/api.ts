@@ -167,7 +167,6 @@ wss.on('connection', function connection(ws : WebSocket) {
                     while (((i<times) && (nextLang == prevLang)) || // No "circular translations" e.g. af > af
                            (i==(times-1) && nextLang == outLang)) // Don't pick output lang for 2nd-to-last translation, this will force a circular
                 }
-                langLog += ' > ' + nextLang
 
                 try {
                     // Perform a translation
@@ -188,6 +187,8 @@ wss.on('connection', function connection(ws : WebSocket) {
                         }
                         console.log('\n')
                     }
+
+                    langLog += ' > ' + nextLang
 
                 } catch (e) {
                     totalAborts++
