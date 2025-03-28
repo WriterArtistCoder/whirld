@@ -167,7 +167,6 @@ wss.on('connection', function connection(ws : WebSocket) {
                     while (((i<times) && (nextLang == prevLang)) || // No "circular translations" e.g. af > af
                            (i==(times-1) && nextLang == outLang)) // Don't pick output lang for 2nd-to-last translation, this will force a circular
                 }
-                langLog += ' > ' + nextLang
 
                 let weirdLang = LANGUAGES[Math.floor(Math.random() * (LANGUAGES.length))]
                 if (i==times) weirdLang = prevLang
@@ -190,6 +189,8 @@ wss.on('connection', function connection(ws : WebSocket) {
                         }
                         console.log('\n')
                     }
+
+                    langLog += ' > ' + nextLang
 
                 } catch (e) {
                     totalAborts++
@@ -241,7 +242,7 @@ wss.on('connection', function connection(ws : WebSocket) {
                                 original: text,
                                 langs: langLog.split(' > '),
                                 langFoundBy,
-                                error: `${i} of requested ${times} translations were completed`,
+                                error: `${i-1} of requested ${times} translations were completed`,
                                 done: true
                             })
                             return
