@@ -240,7 +240,7 @@ wss.on('connection', function connection(ws : WebSocket) {
                                 original: text,
                                 langs: langLog.split(' > '),
                                 langFoundBy,
-                                error: `${i} of requested ${times} translations were completed`,
+                                error: `${i-1} of requested ${times} translations were completed`,
                                 done: true
                             })
                             return
