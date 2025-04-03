@@ -124,9 +124,8 @@ const App: React.FC = () => {
   return (
     <main>
       <header>
-        <div><h1>WHIRLD</h1>
-        <div>Translate anything too many times!</div>
-        </div>
+        <h1>WHIRLD</h1>
+        <div class="headerBlurb">Translate anything too many times!</div>
       </header>
       <div className="biPanelContainer">
         <BiPanel

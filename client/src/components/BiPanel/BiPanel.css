@@ -207,3 +207,29 @@ button:disabled, .isTranslating button {
 .isTranslating.funBegun > .outputButton {
   display: none;
 }
+
+@media only screen and (max-width: 900px) {
+  .biPanel {
+    height: 40vh;
+    font-size: 0.9em;
+  }
+
+  .inputButton {
+    font-size: 1em;
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  .biPanelContainer {
+    font-size: 0.9em;
+  }
+
+  .biPanel {
+    height: 150px;
+  }
+
+  .inputButton {
+    margin-top: 0;
+    padding: 16px;
+  }
+}
