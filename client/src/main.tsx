@@ -123,6 +123,11 @@ const App: React.FC = () => {
 
   return (
     <main>
+      <header>
+        <div><h1>WHIRLD</h1>
+        <div>Translate anything too many times!</div>
+        </div>
+      </header>
       <div className="biPanelContainer">
         <BiPanel
           inputText={inputText}
