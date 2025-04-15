@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import BiPanel from './components/BiPanel/BiPanel'
 import './main.css'
 
@@ -22,6 +22,7 @@ const App: React.FC = () => {
   // Properties shared with BiPanel
   const [inputText, setInputText] = useState('') // Set input panel content
   const [outputText, setOutputText] = useState('') // Set output panel content
+  const [origText, setOrigText] = useState('') // Set original text
   const [logText, setLogText] = useState('') // Set log panel content
   const [isTranslating, setIsTranslating] = useState(false) // Currently translatng?
   const [funBegun, setFunBegun] = useState(false) // True once first translation begins
@@ -56,6 +57,8 @@ const App: React.FC = () => {
     if (!useInput) setInputText(outputText)
     
     let currentText = inputText
+    setOrigText(currentText)
+
     setIsTranslating(true)
     setFunBegun(true)
     setUseInput(false)
@@ -78,14 +81,19 @@ const App: React.FC = () => {
     // }
   }
 
-  const handleCopy = async () => {
+  const handleCopy = useCallback(async () => {
+    let copyText = `🌪️ 🌍 WHIRLD 🌏 🌪️ 
+${outputText}
+Guess the original:
+||${origText}||
+Make you own at https://brokenli.nk`
     try {
-      await navigator.clipboard.writeText(outputText)
+      await navigator.clipboard.writeText(copyText)
     } catch (err) {
       console.error('Failed to copy text:', err)
       // Fallback
       const textArea = document.createElement('textarea')
-      textArea.value = outputText
+      textArea.value = copyText
       document.body.appendChild(textArea)
       textArea.select()
       document.execCommand('copy')
@@ -94,7 +102,7 @@ const App: React.FC = () => {
       setCopied(true)
       setTimeout(()=>{setCopied(false)}, 200)
     }
-  }
+  }, [outputText, origText])
 
   // On each update from server
   useEffect(() => {
@@ -103,16 +111,18 @@ const App: React.FC = () => {
       let date = new Date()
       console.log(date, message)
 
-      // If translation complete
+      // If done due to error
       if (data.error) {
         console.log('Translation error:', data.error)
         setWasError(true)
         setOutputText((data.bamboozled || outputText) + '\nTranslation error: ' + data.error)
       } else {
+        // If done and successful
         if (data.done) {
           setIsTranslating(false)
           savedScrambles.push(data)
           setOutputText(data.bamboozled)
+        // If still WIP
         } else
           setOutputText(`[${data.langs[data.langs.length-1]} ${data.langs.length-1}/${TIMES}] ${data.bamboozled}`)
         
@@ -125,7 +135,7 @@ const App: React.FC = () => {
     <main>
       <header>
         <h1>WHIRLD</h1>
-        <div class="headerBlurb">Translate anything too many times!</div>
+        <div className="headerBlurb">Translate anything too many times!</div>
       </header>
       <div className="biPanelContainer">
         <BiPanel
