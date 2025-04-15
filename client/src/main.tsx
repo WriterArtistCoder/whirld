@@ -26,7 +26,8 @@ const App: React.FC = () => {
   const [logText, setLogText] = useState('') // Set log panel content
   const [isTranslating, setIsTranslating] = useState(false) // Currently translatng?
   const [funBegun, setFunBegun] = useState(false) // True once first translation begins
-  const [copied, setCopied] = useState(false) // Trigger output copied animation
+  const [copyRaw, setCopyRaw] = useState(false) // True once copied, triggering the switch to "Copy raw"
+  const [copyAnim, setCopyAnim] = useState(false) // Trigger output copied animation
   const [wasError, setWasError] = useState(false) // Error message
 
   // Others
@@ -63,6 +64,7 @@ const App: React.FC = () => {
     setFunBegun(true)
     setUseInput(false)
     setWasError(false)
+    setCopyRaw(false)
 
     // try {
     scream({
@@ -82,11 +84,13 @@ const App: React.FC = () => {
   }
 
   const handleCopy = useCallback(async () => {
-    let copyText = `🌪️ 🌍 WHIRLD 🌏 🌪️ 
+    let copyText = copyRaw ? outputText : `🌪️ 🌍 WHIRLD 🌏 🌪️ 
 ${outputText}
 Guess the original:
 ||${origText}||
-Make you own at https://brokenli.nk`
+Make your own at https://brokenli.nk`
+    setCopyRaw(true)
+
     try {
       await navigator.clipboard.writeText(copyText)
     } catch (err) {
@@ -99,10 +103,10 @@ Make you own at https://brokenli.nk`
       document.execCommand('copy')
       document.body.removeChild(textArea)
     } finally {
-      setCopied(true)
-      setTimeout(()=>{setCopied(false)}, 200)
+      setCopyAnim(true)
+      setTimeout(()=>{setCopyAnim(false)}, 200)
     }
-  }, [outputText, origText])
+  }, [copyRaw, outputText, origText])
 
   // On each update from server
   useEffect(() => {
@@ -147,7 +151,8 @@ Make you own at https://brokenli.nk`
           onScramble={handleScramble}
           onCopy={handleCopy}
 
-          copied={copied}
+          copied={copyAnim}
+          copyRaw={copyRaw}
           isTranslating={isTranslating}
           funBegun={funBegun}
           wasError={wasError}

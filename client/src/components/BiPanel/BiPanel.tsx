@@ -11,12 +11,13 @@ interface BiPanelProps {
   onCopy: () => void;
 
   copied: boolean;
+  copyRaw: boolean;
   wasError: boolean;
   isTranslating: boolean;
   funBegun: boolean;
 }
 
-const BiPanel: React.FC<BiPanelProps> = ({ inputText, outputText, logText, onChange, onScramble, isTranslating, funBegun, onCopy, copied, wasError }) => {
+const BiPanel: React.FC<BiPanelProps> = ({ inputText, outputText, logText, onChange, onScramble, isTranslating, funBegun, onCopy, copied, copyRaw, wasError }) => {
   return (
     <section className={(isTranslating ? "isTranslating" : "") + (funBegun ? " funBegun" : "")}>
       {/* <div className="inputLang">
@@ -50,7 +51,7 @@ const BiPanel: React.FC<BiPanelProps> = ({ inputText, outputText, logText, onCha
         disabled={isTranslating || wasError}
         onClick={onCopy}
       >
-        Copy
+        {copyRaw ? 'Copy raw text' : 'Copy fancy text'}
       </button>
 
       <div className="logPanel">
