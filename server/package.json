@@ -14,9 +14,12 @@
     "axios": "^1.7.9",
     "hono": "^4.6.19",
     "jsonwebtoken": "^9.0.2",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "ws": "^8.18.1"
   },
   "scripts": {
-    "dev": "bun --watch run src/api.ts"
+    "dev": "bun --watch run src/api.ts",
+    "build": "bun build src/api.ts --outdir=production --target=node",
+    "start": "bun run production/api.js"
   }
 }
