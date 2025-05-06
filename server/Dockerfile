@@ -12,7 +12,7 @@ RUN bun install
 COPY . .
 
 # Expose your app port (adjust if needed)
-EXPOSE 3000
+EXPOSE 3193
 
 # Start your app
 CMD ["bun", "run", "start"]

@@ -382,10 +382,35 @@ server.on('upgrade', (request, socket, head) => {
 // Enable CORS, allow only client port
 // TODO is this still needed?
 app.use("/*", cors(
-    {
-        origin: 'http://localhost:3000'
-    }
+    // {
+    //     origin: 'http://localhost:3000'
+    // }
 ))
+
+// Welcome screen
+app.get("/", (c) => {
+    c.status(418)
+    return c.html(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You spin me right round</title>
+    <style>
+        @keyframes spinny {
+            from { transform: rotate(0) scale(1); }
+            to { transform: rotate(180deg) scale(10); }
+        }
+    </style>
+</head>
+<body style="background:magenta;">
+    <h1 style="color:aqua; animation: 3s infinite alternate spinny;"><marquee>Welcome to the WHIRLD REST API...</marquee></h1>
+    <button style="font-family: 'Comic Sans', cursive; font-size: 10em" onclick="window.location='https://github.com/WriterArtistCoder/whirld/'">Click the button</button>
+</body>
+</html>
+        `)
+})
 
 console.log(`\x1b[93m${new Date().toISOString()}\x1b[95m WHIRLD server is running on port ${port} \x1b[0m`)
 
