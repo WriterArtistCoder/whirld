@@ -54,8 +54,7 @@ var require_delayed_stream = __commonJS((exports, module) => {
       delayedStream._handleEmit(arguments);
       return realEmit.apply(source, arguments);
     };
-    source.on("error", function() {
-    });
+    source.on("error", function() {});
     if (delayedStream.pauseStream) {
       source.pause();
     }
@@ -9359,8 +9358,7 @@ var require_implementation = __commonJS((exports, module) => {
     }
     bound = Function("binder", "return function (" + joiny(boundArgs, ",") + "){ return binder.apply(this,arguments); }")(binder);
     if (target.prototype) {
-      var Empty = function Empty() {
-      };
+      var Empty = function Empty() {};
       Empty.prototype = target.prototype;
       bound.prototype = new Empty;
       Empty.prototype = null;
@@ -9480,8 +9478,7 @@ var require_get_intrinsic = __commonJS((exports, module) => {
   var getEvalledConstructor = function(expressionSyntax) {
     try {
       return $Function('"use strict"; return (' + expressionSyntax + ").constructor;")();
-    } catch (e) {
-    }
+    } catch (e) {}
   };
   var $gOPD = require_gopd();
   var $defineProperty = require_es_define_property();
@@ -10220,11 +10217,9 @@ var require_debug = __commonJS((exports, module) => {
     if (!debug) {
       try {
         debug = (()=>{throw new Error("Cannot require module "+"debug");})()("follow-redirects");
-      } catch (error) {
-      }
+      } catch (error) {}
       if (typeof debug !== "function") {
-        debug = function() {
-        };
+        debug = function() {};
       }
     }
     debug.apply(null, arguments);
@@ -10599,8 +10594,7 @@ var require_follow_redirects = __commonJS((exports, module) => {
     });
     return exports2;
   }
-  function noop2() {
-  }
+  function noop2() {}
   function parseUrl(input) {
     var parsed;
     if (useNativeURL) {
@@ -10714,8 +10708,7 @@ var require_constants = __commonJS((exports, module) => {
     kListener: Symbol("kListener"),
     kStatusCode: Symbol("status-code"),
     kWebSocket: Symbol("websocket"),
-    NOOP: () => {
-    }
+    NOOP: () => {}
   };
 });
 
@@ -10793,8 +10786,7 @@ var require_buffer_util = __commonJS((exports, module) => {
         else
           bufferUtil.unmask(buffer, mask);
       };
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 });
 
@@ -11273,8 +11265,7 @@ var require_validation = __commonJS((exports, module) => {
       module.exports.isValidUTF8 = function(buf) {
         return buf.length < 32 ? _isValidUTF8(buf) : isValidUTF8(buf);
       };
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 });
 
@@ -14275,8 +14266,7 @@ var require_decode = __commonJS((exports, module) => {
         if (obj !== null && typeof obj === "object") {
           payload = obj;
         }
-      } catch (e) {
-      }
+      } catch (e) {}
     }
     if (options.complete === true) {
       return {
@@ -14491,8 +14481,7 @@ var require_constants2 = __commonJS((exports, module) => {
 
 // node_modules/semver/internal/debug.js
 var require_debug2 = __commonJS((exports, module) => {
-  var debug = typeof process === "object" && process.env && process.env.NODE_DEBUG && /\bsemver\b/i.test(process.env.NODE_DEBUG) ? (...args) => console.error("SEMVER", ...args) : () => {
-  };
+  var debug = typeof process === "object" && process.env && process.env.NODE_DEBUG && /\bsemver\b/i.test(process.env.NODE_DEBUG) ? (...args) => console.error("SEMVER", ...args) : () => {};
   module.exports = debug;
 });
 
@@ -16789,8 +16778,7 @@ var require_lodash5 = __commonJS((exports, module) => {
     if (value != null && typeof value.toString != "function") {
       try {
         result = !!(value + "");
-      } catch (e) {
-      }
+      } catch (e) {}
     }
     return result;
   }
@@ -18004,8 +17992,7 @@ var Hono = class {
       let executionContext = undefined;
       try {
         executionContext = c.executionCtx;
-      } catch {
-      }
+      } catch {}
       return [c.env, executionContext];
     };
     replaceRequest ||= (() => {
@@ -19001,8 +18988,7 @@ var toObjectSet = (arrayOrString, delimiter) => {
   isArray(arrayOrString) ? define(arrayOrString) : define(String(arrayOrString).split(delimiter));
   return obj;
 };
-var noop = () => {
-};
+var noop = () => {};
 var toFiniteNumber = (value, defaultValue) => {
   return value != null && Number.isFinite(value = +value) ? value : defaultValue;
 };
@@ -20567,16 +20553,14 @@ var http_default = isHttpAdapterSupported && function httpAdapter(config) {
         try {
           const knownLength = await util2.promisify(data.getLength).call(data);
           Number.isFinite(knownLength) && knownLength >= 0 && headers.setContentLength(knownLength);
-        } catch (e) {
-        }
+        } catch (e) {}
       }
     } else if (utils_default.isBlob(data) || utils_default.isFile(data)) {
       data.size && headers.setContentType(data.type || "application/octet-stream");
       headers.setContentLength(data.size || 0);
       data = stream3.Readable.from(readBlob_default(data));
     } else if (data && !utils_default.isStream(data)) {
-      if (Buffer.isBuffer(data)) {
-      } else if (utils_default.isArrayBuffer(data)) {
+      if (Buffer.isBuffer(data)) {} else if (utils_default.isArrayBuffer(data)) {
         data = Buffer.from(new Uint8Array(data));
       } else if (utils_default.isString(data)) {
         data = Buffer.from(data, "utf-8");
@@ -20845,13 +20829,11 @@ var cookies_default = platform_default.hasStandardBrowserEnv ? {
     this.write(name, "", Date.now() - 86400000);
   }
 } : {
-  write() {
-  },
+  write() {},
   read() {
     return null;
   },
-  remove() {
-  }
+  remove() {}
 };
 
 // node_modules/axios/lib/core/mergeConfig.js
@@ -21359,8 +21341,7 @@ utils_default.forEach(knownAdapters, (fn, value) => {
   if (fn) {
     try {
       Object.defineProperty(fn, "name", { value });
-    } catch (e) {
-    }
+    } catch (e) {}
     Object.defineProperty(fn, "adapterName", { value });
   }
 });
@@ -21516,8 +21497,7 @@ class Axios {
             err.stack += `
 ` + stack;
           }
-        } catch (e) {
-        }
+        } catch (e) {}
       }
       throw err;
     }
@@ -21550,8 +21530,7 @@ class Axios {
         }, true);
       }
     }
-    if (config.allowAbsoluteUrls !== undefined) {
-    } else if (this.defaults.allowAbsoluteUrls !== undefined) {
+    if (config.allowAbsoluteUrls !== undefined) {} else if (this.defaults.allowAbsoluteUrls !== undefined) {
       config.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
     } else {
       config.allowAbsoluteUrls = true;
@@ -22489,8 +22468,29 @@ server.on("upgrade", (request, socket, head) => {
     socket.destroy();
   }
 });
-app.use("/*", cors({
-  origin: "http://localhost:3000"
-}));
+app.use("/*", cors());
+app.get("/", (c) => {
+  c.status(418);
+  return c.html(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You spin me right round</title>
+    <style>
+        @keyframes spinny {
+            from { transform: rotate(0) scale(1); }
+            to { transform: rotate(180deg) scale(10); }
+        }
+    </style>
+</head>
+<body style="background:magenta;">
+    <h1 style="color:aqua; animation: 3s infinite alternate spinny;"><marquee>Welcome to the WHIRLD REST API...</marquee></h1>
+    <button style="font-family: 'Comic Sans', cursive; font-size: 10em" onclick="window.location='https://github.com/WriterArtistCoder/whirld/'">Click the button</button>
+</body>
+</html>
+        `);
+});
 console.log(`\x1B[93m${new Date().toISOString()}\x1B[95m WHIRLD server is running on port ${port} \x1B[0m`);
 server.listen(port);

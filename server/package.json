@@ -20,6 +20,7 @@
   "scripts": {
     "dev": "bun --watch run src/api.ts",
     "build": "bun build src/api.ts --outdir=production --target=node",
-    "start": "bun run production/api.js"
+    "start": "bun run src/api.ts",
+    "old-start": "bun run production/api.js"
   }
 }
