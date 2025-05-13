@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
+
+/* TODO Use em instead of px */
+html {
+  --loadProgress: 0%;
+}
+
+* {
+  font-family: 'Oxygen Mono', monospace;
+}
+
+section {
+  display: grid;
+  grid-template-columns: 100% auto;
+  transition: all 250ms;
+  width: 100%;
+  margin: auto;
+}
+
+section.funBegun {
+  grid-template-columns: 50% auto;
+}
+
+/* Language selector */
+.inputLang {
+  position: relative;
+  top: 1em;
+  left: -2.5em;
+
+  font-size: 1.5em;
+  filter: saturate(0);
+  transition: all 200ms;
+}
+
+.inputLang:hover {
+  filter: saturate(1);
+  cursor: pointer;
+}
+
+/* Panels */
+
+/* TODO Panel heights should adjust to content size */
+
+.biPanel {
+  display: block;
+  height: 165px;
+  margin: 0;
+  padding: 20px;
+  resize: none;
+
+  font-size: 1em;
+  transition: all 200ms;
+
+  border: transparent solid 6px;
+}
+
+.biPanel:focus {
+  outline: none !important;
+}
+
+.inputPanel {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+
+  background: #d3f4ff;
+  color: #1f7f9c;
+  border-color: #31cfff;
+}
+
+.inputPanel::placeholder {
+  color: #696969;
+}
+
+.inputPanel::selection {
+  background: #3c38b0;
+  color: #fff9e8;
+}
+
+.inputPanel:focus {
+  color: #1339b4;
+  border-color: #d3f4ff;
+}
+
+.outputPanel {
+  display: none;
+
+  grid-column: 2 / span 2;
+  grid-row: 1 / span 1;
+
+  background: #dcffd3;
+  color: #0d8380;
+  border-color: #11a6a3;
+}
+
+.outputPanel:focus {
+  color: #0f5d48;
+  border-color: #dcffd3;
+}
+
+.outputPanel::selection {
+  background: #acff2f;
+  color: #4e5451;
+}
+
+.isTranslating > .outputPanel {
+  background: #333;
+  color: #fff;
+  border-color: #333;
+}
+
+.funBegun > .outputPanel {
+  display: block;
+}
+
+.outputPanel.outputCopied {
+  transform: scale(80%);
+  filter: brightness(120%) blur(1px);
+}
+
+.outputPanel.outputError {
+  background: transparent;
+  color: #bc3e2b;
+  border-color: #bc3e2b;
+}
+
+.outputError::selection {
+  background: #ffdf2f;
+  color: #bc3e2b;
+}
+
+.logPanel {
+  grid-column: 1 / span 2;
+  grid-row: 3 / span 1;
+
+  color: #555;
+  font-style: italic;
+  font-size: 15px;
+  padding: 10px;
+}
+
+/* Buttons */
+
+button {
+  font-size: 1.2em;
+  padding: 20px;
+  position: relative;
+  bottom: 0;
+
+  transition: all;
+  transition-duration: 100ms;
+  color: white;
+  border: none;
+  outline: none;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+button::selection {
+  background: transparent;
+}
+
+button:disabled, .isTranslating button {
+  cursor: default;
+}
+
+.inputButton {
+  margin-top: 10px;
+  /* TODO Turn button into progress bar */
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+  background: #1339b4;
+}
+
+.inputButton:hover, .inputButton:focus {
+  background: #8282ff;
+}
+
+.isTranslating > .inputButton {
+  background: linear-gradient(90deg, #1339b4 var(--loadProgress), #9db4ff var(--loadProgress));
+  grid-column: 1 / span 3;
+  padding: 5px;
+}
+
+.outputButton {
+  display: none;
+  margin-top: 10px;
+  grid-column: 2 / span 2;
+  grid-row: 2 / span 1;
+
+  background: #1b951d;
+}
+
+.outputButton:hover, .outputButton:focus {
+  background: #1fbd24;
+}
+
+.outputButton:active {
+  bottom: 5px;
+}
+
+.funBegun > .outputButton {
+  display: block;
+}
+
+.isTranslating.funBegun > .outputButton {
+  display: none;
+}
+
+@media only screen and (max-width: 900px) {
+  .biPanel {
+    height: 40vh;
+    font-size: 0.9em;
+  }
+
+  .inputButton {
+    font-size: 1em;
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  .biPanelContainer {
+    font-size: 0.9em;
+  }
+
+  .biPanel {
+    height: 150px;
+  }
+
+  .inputButton {
+    margin-top: 0;
+    padding: 16px;
+  }
+}
