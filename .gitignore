@@ -26,4 +26,3 @@ dist-ssr
 package-lock.json
 yarn.lock
 server/annals.txt
-server/bun.lock
