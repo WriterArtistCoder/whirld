@@ -3,7 +3,7 @@ import BiPanel from './components/BiPanel/BiPanel'
 import './main.css'
 
 // Open WebSocket
-const ws = new WebSocket(`ws://rocketguitar.xyz:3193/api/scramble`)
+const ws = new WebSocket(`ws://rocketmusicplatform.com/api/scramble`)
 const scream = (data : Object) => ws.send(JSON.stringify(data))
 
 const TIMES = 10 // TODO make user-customizable
